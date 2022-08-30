@@ -28,6 +28,17 @@ public class Insegnanti {
             inverseJoinColumns = @JoinColumn(name = "corsis_id"))
     private List<Corsi> corsis = new ArrayList<>();
 
+    @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
+    private List<Prenotazioni> prenotazionis = new ArrayList<>();
+
+    public List<Prenotazioni> getPrenotazionis() {
+        return prenotazionis;
+    }
+
+    public void setPrenotazionis(List<Prenotazioni> prenotazionis) {
+        this.prenotazionis = prenotazionis;
+    }
+
     public List<Corsi> getCorsis() {
         return corsis;
     }
