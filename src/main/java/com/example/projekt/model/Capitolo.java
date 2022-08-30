@@ -23,6 +23,18 @@ public class Capitolo {
     @Column(name = "numero_capitolo", nullable = false)
     private Integer numeroCapitolo;
 
+    @ManyToOne
+    @JoinColumn(name = "corsi_id")
+    private Corsi corsi;
+
+    public Corsi getCorsi() {
+        return corsi;
+    }
+
+    public void setCorsi(Corsi corsi) {
+        this.corsi = corsi;
+    }
+
     public Integer getNumeroCapitolo() {
         return numeroCapitolo;
     }

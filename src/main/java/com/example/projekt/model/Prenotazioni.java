@@ -20,6 +20,18 @@ public class Prenotazioni {
     @Column(name = "slot_orari", nullable = false, length = 5)
     private String slotOrari;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "insegnanti_id", nullable = false)
+    private Insegnanti insegnanti;
+
+    public Insegnanti getInsegnanti() {
+        return insegnanti;
+    }
+
+    public void setInsegnanti(Insegnanti insegnanti) {
+        this.insegnanti = insegnanti;
+    }
+
     public String getSlotOrari() {
         return slotOrari;
     }
