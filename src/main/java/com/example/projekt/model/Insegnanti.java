@@ -22,30 +22,6 @@ public class Insegnanti {
     @Column(name = "foto")
     private String foto;
 
-    @ManyToMany
-    @JoinTable(name = "insegnanti_corsis",
-            joinColumns = @JoinColumn(name = "insegnanti_id"),
-            inverseJoinColumns = @JoinColumn(name = "corsis_id"))
-    private List<Corsi> corsis = new ArrayList<>();
-
-    @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
-    private List<Prenotazioni> prenotazionis = new ArrayList<>();
-
-    public List<Prenotazioni> getPrenotazionis() {
-        return prenotazionis;
-    }
-
-    public void setPrenotazionis(List<Prenotazioni> prenotazionis) {
-        this.prenotazionis = prenotazionis;
-    }
-
-    public List<Corsi> getCorsis() {
-        return corsis;
-    }
-
-    public void setCorsis(List<Corsi> corsis) {
-        this.corsis = corsis;
-    }
 
     public String getFoto() {
         return foto;

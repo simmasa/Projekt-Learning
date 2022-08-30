@@ -10,25 +10,25 @@ public class Capitolo {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+
     @Column(name = "titolo", nullable = false)
     private String titolo;
 
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "descrizione")
+    private String descrizione;
 
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
-    @ManyToOne
-    @JoinColumn(name = "corsi_id")
-    private Corsi corsi;
+    @Column(name = "numero_capitolo", nullable = false)
+    private Integer numeroCapitolo;
 
-    public Corsi getCorsi() {
-        return corsi;
+    public Integer getNumeroCapitolo() {
+        return numeroCapitolo;
     }
 
-    public void setCorsi(Corsi corsi) {
-        this.corsi = corsi;
+    public void setNumeroCapitolo(Integer numeroCapitolo) {
+        this.numeroCapitolo = numeroCapitolo;
     }
 
     public String getUrl() {
@@ -39,12 +39,12 @@ public class Capitolo {
         this.url = url;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescrizione() {
+        return descrizione;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescrizione(String descr) {
+        this.descrizione = descr;
     }
 
     public String getTitolo() {
