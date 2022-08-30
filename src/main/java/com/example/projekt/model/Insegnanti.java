@@ -22,6 +22,28 @@ public class Insegnanti {
     @Column(name = "foto")
     private String foto;
 
+    @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
+    private List<Corsi> corsi = new ArrayList<>();
+
+    @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
+    private List<Prenotazioni> prenotazioni = new ArrayList<>();
+
+    public List<Prenotazioni> getPrenotazioni() {
+        return prenotazioni;
+    }
+
+    public void setPrenotazioni(List<Prenotazioni> prenotazioni) {
+        this.prenotazioni = prenotazioni;
+    }
+
+    public List<Corsi> getCorsi() {
+        return corsi;
+    }
+
+    public void setCorsi(List<Corsi> corsi) {
+        this.corsi = corsi;
+    }
+
 
     public String getFoto() {
         return foto;

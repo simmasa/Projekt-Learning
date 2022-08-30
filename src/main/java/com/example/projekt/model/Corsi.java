@@ -29,6 +29,52 @@ public class Corsi {
     @Column(name = "data_creazione", nullable = false)
     private Date dataCreazione;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "categorie_id", nullable = false)
+    private Categorie categorie;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "tag_id", nullable = false)
+    private Tag tag;
+
+    @OneToMany(mappedBy = "corsi", orphanRemoval = true)
+    private List<Capitolo> capitoli = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "insegnanti_id")
+    private Insegnanti insegnanti;
+
+    public Insegnanti getInsegnanti() {
+        return insegnanti;
+    }
+
+    public void setInsegnanti(Insegnanti insegnanti) {
+        this.insegnanti = insegnanti;
+    }
+
+    public List<Capitolo> getCapitoli() {
+        return capitoli;
+    }
+
+    public void setCapitoli(List<Capitolo> capitoli) {
+        this.capitoli = capitoli;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 
     public Date getDataCreazione() {
         return dataCreazione;
