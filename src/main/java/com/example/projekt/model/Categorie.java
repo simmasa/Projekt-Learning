@@ -1,16 +1,16 @@
-package model;
+package com.example.projekt.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tag")
-public class Tag {
+@Table(name = "categorie")
+public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, unique = true)
     private String nome;
 
     public String getNome() {
