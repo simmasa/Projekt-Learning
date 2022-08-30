@@ -33,24 +33,35 @@ public class Corsi {
     @JoinColumn(name = "categorie_id", nullable = false)
     private Categorie categorie;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "tag_id", nullable = false)
-    private Tag tag;
-
     @OneToMany(mappedBy = "corsi", orphanRemoval = true)
     private List<Capitolo> capitoli = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "insegnanti_id")
-    private Insegnanti insegnanti;
 
-    public Insegnanti getInsegnanti() {
-        return insegnanti;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "corsi_tags",
+            joinColumns = @JoinColumn(name = "corsi_id"),
+            inverseJoinColumns = @JoinColumn(name = "tags_id"))
+    private List<Tag> tags = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "corsi")
+    private List<Insegnanti> insegnantis = new ArrayList<>();
+
+    public List<Insegnanti> getInsegnantis() {
+        return insegnantis;
     }
 
-    public void setInsegnanti(Insegnanti insegnanti) {
-        this.insegnanti = insegnanti;
+    public void setInsegnantis(List<Insegnanti> insegnantis) {
+        this.insegnantis = insegnantis;
     }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
 
     public List<Capitolo> getCapitoli() {
         return capitoli;
@@ -60,13 +71,6 @@ public class Corsi {
         this.capitoli = capitoli;
     }
 
-    public Tag getTag() {
-        return tag;
-    }
-
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
 
     public Categorie getCategorie() {
         return categorie;
