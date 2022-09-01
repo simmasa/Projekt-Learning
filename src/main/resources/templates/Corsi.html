@@ -34,7 +34,7 @@
                 <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                     <div class="col" th:each="corso : ${corsiTop}">
-                      <div class="card shadow-sm">
+                      <a href="#"><div class="card shadow-sm">
                         <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
             
                         <div class="card-body">
@@ -48,21 +48,22 @@
                                 </li>
                             </ul>
                         </div>
-                      </div>
+                      </div></a>
                     </div>
                 </div>
             </div>
             </div>
             <div class="categorie">
-                    <div class="section-title my-3">
+                    <div id="cats" class="section-title my-3">
                           <h2>Categorie</h2>
                     </div>
                     <div class="container">
-                        <a type="button" class="py-2 px-3 mx-1" th:href="@{/Corsi}">Tutte</a>
-                        <form>
-                            <input type="button" th:each="cat : ${categorie}" th:value="${cat.nome}" 
-                            class="py-2 px-3 mx-1 border"></input>
-                        </form>
+                        <!-- form action="/corsi">
+                            <a type="button" class="btn btn-light" th:href="@{/corsi}">Tutte</a>
+                            <button class="btn btn-light" name="cat" type="submit" th:each="cat : ${categorie}" th:value="${cat.nome}" th:text="${cat.nome}"></button>
+                        </form -->
+                        <a type="button" class="btn btn-light" th:href="@{/corsi#cats}">Tutte</a>
+                        <a type="button" class="btn btn-light" th:href="@{|/corsi&#63cat=${cat.nome}#cats|}" th:each="cat : ${categorie}" th:text="${cat.nome}"></a>
                     </div>
             </div>
             <div class="all">
@@ -72,7 +73,8 @@
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                         <div class="col" th:each="corso : ${corsi}">
-                          <div class="card shadow-sm">
+                          <a href="#">
+                              <div class="card shadow-sm">
                             <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
                 
                             <div class="card-body">
@@ -87,6 +89,7 @@
                                 </ul>
                             </div>
                           </div>
+                          </a>
                         </div>
                       </div>    
             </div>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Corsi")
+@RequestMapping("/corsi")
 public class SitiController {
 
     @Autowired
@@ -23,16 +23,26 @@ public class SitiController {
     @Autowired
     public CategorieRepository catRepo;
 
+//    @GetMapping
+//    public String corsi(Model m) {
+//        m.addAttribute("corsi", corsiRepo.findAll());
+//        m.addAttribute("categorie",catRepo.findAll());
+//        m.addAttribute("corsiTop",topCorsi());
+//        return "Corsi";
+//    }
+
     @GetMapping
-    public String corsi(Model m) {
-        m.addAttribute("corsi", corsiRepo.findAll());
+    public String corsiQuery(@RequestParam(name = "cat",required = false) String cat, Model m) {
+        if (cat!=null) {
+            List<Corsi> search = corsiRepo.findByCategorie_NomeLikeIgnoreCase(cat);
+            m.addAttribute("corsi", search);
+        }else {
+            m.addAttribute("corsi", corsiRepo.findAll());
+        }
         m.addAttribute("categorie",catRepo.findAll());
         m.addAttribute("corsiTop",topCorsi());
         return "Corsi";
     }
-
-//    @RequestMapping
-//    public String corsiQuery(@RequestParam(name = "queryT") String queryTitle, Model m )
 
     public List<Corsi> topCorsi() {
         List<Corsi> completa = corsiRepo.findByOrderByNumVisualDesc();

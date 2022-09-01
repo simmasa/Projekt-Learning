@@ -8,5 +8,8 @@ import java.util.List;
 public interface CorsiRepository extends CrudRepository<Corsi, Integer> {
     List<Corsi> findByOrderByNumVisualDesc();
 
+    List<Corsi> findByCategorie_NomeLikeIgnoreCase(String nome);
+
+
 
 }
