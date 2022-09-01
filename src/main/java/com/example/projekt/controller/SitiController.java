@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +31,14 @@ public class SitiController {
         return "Corsi";
     }
 
+//    @RequestMapping
+//    public String corsiQuery(@RequestParam(name = "queryT") String queryTitle, Model m )
+
     public List<Corsi> topCorsi() {
         List<Corsi> completa = corsiRepo.findByOrderByNumVisualDesc();
         List<Corsi> top = new ArrayList<Corsi>();
         for (int i=0;i<3;i++) {
-            top.add(i, completa.get(i));
+            top.add(completa.get(i));
         }
         return top;
     }
