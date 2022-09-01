@@ -29,6 +29,8 @@ public class Corsi {
     @Column(name = "data_creazione", nullable = false)
     private Date dataCreazione;
 
+
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "categorie_id", nullable = false)
     private Categorie categorie;
