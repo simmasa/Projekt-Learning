@@ -46,6 +46,17 @@ public class Corsi {
     @ManyToMany(mappedBy = "corsi")
     private List<Insegnanti> insegnantis = new ArrayList<>();
 
+    @Column(name = "num_visual", nullable = false)
+    private Long numVisual;
+
+    public Long getNumVisual() {
+        return numVisual;
+    }
+
+    public void setNumVisual(Long numVisual) {
+        this.numVisual = numVisual;
+    }
+
     public List<Insegnanti> getInsegnantis() {
         return insegnantis;
     }
