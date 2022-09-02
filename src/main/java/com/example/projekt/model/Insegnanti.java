@@ -1,6 +1,8 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,11 @@ public class Insegnanti {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotEmpty(message = "Riempi il campo nome")
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotEmpty(message = "Riempi il campo cognome")
     @Column(name = "cognome", nullable = false)
     private String cognome;
 
@@ -48,7 +52,6 @@ public class Insegnanti {
     public void setPrenotazioni(List<Prenotazioni> prenotazioni) {
         this.prenotazioni = prenotazioni;
     }
-
 
 
     public String getFoto() {
