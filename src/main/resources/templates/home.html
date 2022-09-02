@@ -35,9 +35,10 @@
   		<p>Impara con noi!</p>
 	</div>
 	<h1 class="text-center">Corsi più caldi</h1>
-	
+	<div class="container">
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
     	<div class="col" th:each="corso : ${corsiTop}">
+    	<a th:href="@{|/corsi/${corso.id}|}" class="link-dark" style="text-decoration: none">
         	<div class="card shadow-sm">
             	<img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
 
@@ -52,8 +53,10 @@
                         </ul>
                 </div>
            </div>
+    	</a>
        </div>
     </div>
+	</div>
 		
 	</main>
 	
