@@ -40,7 +40,9 @@
     	<div class="col" th:each="corso : ${corsiTop}">
     	<a th:href="@{|/corsi/${corso.id}|}" class="link-dark" style="text-decoration: none">
         	<div class="card shadow-sm">
-            	<img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
+            	<!-- <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube"> -->
+				<img th:src="@{${'https://img.youtube.com/vi/' + corso.capitoli[0].url +'/0.jpg'}}" alt="thumbnail Youtube">
+				
 
             	<div class="card-body">
                 	<h5 class="card-title" th:text="${corso.titolo}"></h5>
