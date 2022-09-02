@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.projekt.model.Corsi;
+import com.example.projekt.repository.CapitoloRepository;
 import com.example.projekt.repository.CorsiRepository;
 
 @Controller
@@ -19,10 +20,14 @@ public class HomeController {
 	@Autowired
 	private CorsiRepository corsiRepo;
 
+	@Autowired
+	private CapitoloRepository capitoloRepo;
+
 	@GetMapping
 	public String corsiList(Model model) {
 		model.addAttribute("corsi", corsiRepo.findAll());
 		model.addAttribute("corsiTop", corsiRepo.findByOrderByNumVisualDesc());
+		model.addAttribute("capitolo", capitoloRepo.findAll());
 		return "home";
 	}
 
