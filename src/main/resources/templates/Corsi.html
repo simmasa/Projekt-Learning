@@ -34,18 +34,15 @@
                 <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                     <div class="col" th:each="corso : ${corsiTop}">
-                      <a href="#"><div class="card shadow-sm">
-                        <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
-            
+                      <a th:href="@{|/corsi/${corso.id}|}"><div class="card shadow-sm">
+                        <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/0.jpg'}" alt="thumbnail Youtube">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${corso.titolo}"></h5>
                             <p class="card-text">Categoria: <span th:text="${corso.categorie.nome}"></span></p>
                             <p class="card-text">Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
                             <p class="card-text">Durata: <span th:text="${corso.durata}"></span></p>
                             <ul style="list-style: none; padding-left: 0">
-                                <li th:each="t : ${corso.tags}" th:text="${t.nome}" style="display: inline">
-
-                                </li>
+                                <li th:each="t : ${corso.tags}" th:text="${t.nome}" style="display: inline"></li>
                             </ul>
                         </div>
                       </div></a>
@@ -73,9 +70,9 @@
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                         <div class="col" th:each="corso : ${corsi}">
-                          <a href="#">
+                          <a th:href="@{|/corsi/${corso.id}|}">
                               <div class="card shadow-sm">
-                            <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube">
+                            <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/0.jpg'}" alt="thumbnail Youtube">
                 
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${corso.titolo}"></h5>

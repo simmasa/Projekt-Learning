@@ -30,11 +30,11 @@
         </header>
         <div class="container">
             <!-- hero -->
-            <div class="container col-xxl-8 px-4 py-5">
-                <div class="row flex-lg-row-reverse g-5 py-5">
+            <div class="container px-4 py-5">
+                <div class="row flex-lg-row-reverse g-5 py-5 align-items-center">
                   <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="https://img.youtube.com/vi/videoId/maxresdefault.jpg" alt="thumbnail Youtube">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start my-3">
+                    <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/hqdefault.jpg'}" alt="thumbnail Youtube" class="img-fluid">
+                    <div class="d-grid gap-2 d-md-flex justify-content-center my-3">
                       <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Compra</button>
                       <button type="button" class="btn btn-outline-secondary btn-lg px-4">Wishlist</button>
                     </div>
@@ -51,12 +51,13 @@
             </div>
               <!-- tabella capitoli -->
             <div class="container">
-                <table class="table">
+                <table class="table align-middle">
                   <thead>
                       <tr>
-                          <th scope="col">Num.Capitolo</th>
-                          <th scope="col">Titolo</th>
+                          <th scope="col col-1">Num.Capitolo</th>
+                          <th scope="col col-2">Titolo</th>
                           <th scope="col">Descrizione</th>
+                          <th scope="col"></th>
                       </tr>
                   </thead>
                   <tbody>
@@ -64,6 +65,7 @@
                           <th scope="row" th:text="${cap.numeroCapitolo}"></th>
                           <td th:text="${cap.titolo}"></td>
                           <td th:text="${cap.descrizione}"></td>
+                          <td><a class="btn btn-warning" href="#">Avvia</a></td>
                       </tr>
                   </tbody>
                 </table>

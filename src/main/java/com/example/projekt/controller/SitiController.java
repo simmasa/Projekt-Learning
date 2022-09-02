@@ -45,6 +45,7 @@ public class SitiController {
         Optional<Corsi> corso = corsiRepo.findById(corsoId);
         if (corso.isPresent()){
             m.addAttribute("corso", corso.get());
+            incCorsoVis(corso.get());
         }else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Impossibile trovare corso con l'id specificato");
         }
@@ -59,4 +60,10 @@ public class SitiController {
         }
         return top;
     }
+     public void incCorsoVis(Corsi corso) {
+        long visual = corso.getNumVisual();
+        visual+=1;
+        corso.setNumVisual(visual);
+        corsiRepo.save(corso);
+     }
 }
