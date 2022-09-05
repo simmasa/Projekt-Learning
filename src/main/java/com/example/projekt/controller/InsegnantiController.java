@@ -1,4 +1,4 @@
-package com.example.projekt.Controller;
+package com.example.projekt.controller;
 
 import java.util.Optional;
 
