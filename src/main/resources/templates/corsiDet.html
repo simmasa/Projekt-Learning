@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments :: metatags(name=${corso.titolo})">
+</head>
+<body>
+    <header th:replace="fragments :: header"></header>
+    <main>
+        <div class="container">
+            <!-- hero -->
+            <div class="container px-4 pt-4">
+                <div class="row flex-lg-row-reverse g-5 align-items-center">
+                  <div class="col-10 col-sm-8 col-lg-6">
+                    <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/hqdefault.jpg'}" alt="thumbnail Youtube" class="img-fluid">
+                    <div class="d-grid gap-2 d-md-flex justify-content-center my-3">
+                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Compra</button>
+                      <button type="button" class="btn btn-outline-secondary btn-lg px-4">Wishlist</button>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3" th:text="${corso.titolo}"></h1>
+                    <p class="lead" th:text="${corso.descrizione}"></p>
+                    <p>Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
+                    <p >Durata: <span th:text="${corso.durata}"></span> ore</p>
+                    <p><span th:text="${corso.insegnantis.size} > 1 ? 'Docenti: ' : 'Docente: '"></span><span th:each="i : ${corso.insegnantis}" th:text="${i.nome}+' '+${i.cognome}"></span></p>
+                    <p >Numero visualizzazioni: <span th:text="${corso.numVisual}"></span></p>
+                  </div>
+                </div>
+            </div>
+              <!-- tabella capitoli -->
+            <div class="container">
+                <table class="table align-middle text-center caption-top">
+                  <caption>Lista Capitoli</caption>
+                  <thead>
+                      <tr>
+                          <th class="col-1" scope="col">Num.Capitolo</th>
+                          <th class="col-2" scope="col">Titolo</th>
+                          <th scope="col">Descrizione</th>
+                          <th scope="col"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr th:each="cap : ${corso.capitoli}">
+                          <th scope="row" th:text="${cap.numeroCapitolo}"></th>
+                          <td th:text="${cap.titolo}"></td>
+                          <td th:text="${cap.descrizione}"></td>
+                          <td class="text-end"><a class="btn btn-warning" th:href="@{|/corsi/${corso.id}/${cap.id}|}">Avvia</a></td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
