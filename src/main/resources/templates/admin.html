@@ -4,6 +4,13 @@
     <th:block th:replace="fragments :: metatags(name='Amministrazione')"></th:block>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        div.ex1{
+        width:700px;
+
+
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +42,7 @@
 
     <div class="w-25">
 
-        <h2 class="text-center">Lista Insegnanti <a class="btn btn-dark"  title="Edit" th:href="@{admin/add}" role="button"><i class="bi bi-plus-lg"></i></a></h2>
+        <h2 class="text-center">Lista Insegnanti <a class="btn btn-dark"  title="Edit" th:href="@{/admin/add}" role="button"><i class="bi bi-plus-lg"></i></a></h2>
         <table class="table">
             <thead>
             <tr>
@@ -49,23 +56,23 @@
                 <td th:text="${ins.nome}"></td>
                 <td th:text="${ins.cognome}"></td>
                 <td class="ms-5 text-center">
-                    <a class="btn btn-dark"  title="Edit"><i class="bi bi-pen text-white"></i></a>
-                    <a class="btn btn-dark" title="Delete" th:href="@{|/admin/cancella/${ins.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
+                    <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/edit/${ins.getId}|}"><i class="bi bi-pen text-white"></i></a>
+                    <a class="btn btn-dark" title="Delete" th:href="@{|/admin/del/${ins.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="w-25">
-        <h2 class="text-center">Lista Corsi</h2>
-        <table class="table">
+    <div class="ex1">
+        <h2 class="text-center">Lista Corsi <a class="btn btn-dark"  title="Edit" th:href="@{/admin/addCorsi}" role="button"><i class="bi bi-plus-lg"></i></a></h2>
+        <table class="table ex1">
             <thead>
             <tr>
                 <th class="text-secondary" scope="col">Nome Corso</th>
                 <th class ="text-center" scope="col">Livello</th>
                 <th class ="text-center" scope="col">Durata(ore)</th>
-                <th scope="col">Azioni</th>
+                <th class ="text-center" scope="col">Data creazione</th>
+                <th class ="text-center" scope="col">Azioni</th>
             </tr>
             </thead>
             <tbody>
@@ -73,13 +80,16 @@
                 <td class ="fw-bold" th:text="${corsi.titolo}"></td>
                 <td class ="text-center" th:text="${corsi.livelloDifficolta}"></td>
                 <td class ="text-center" th:text="${corsi.durata}"></td>
+                <td class ="text-center" th:text="${corsi.dataCreazione}"></td>
+                <td class="ms-5 text-center">
+                    <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/editCorsi/${corsi.getId}|}"><i class="bi bi-pen text-white"></i></a>
+                    <a class="btn btn-dark" title="Delete" th:href="@{|/admin/delCorsi/${corsi.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-
 
 
 <script src="./Headers · Bootstrap v5.2_files/bootstrap.bundle.min.js.download" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

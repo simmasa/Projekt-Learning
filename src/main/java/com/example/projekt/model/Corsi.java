@@ -29,7 +29,9 @@ public class Corsi {
     @Column(name = "data_creazione", nullable = false)
     private Date dataCreazione;
 
-
+    public void setDataCreazione(Date dataCreazione) {
+        this.dataCreazione = dataCreazione;
+    }
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "categorie_id", nullable = false)
@@ -46,7 +48,15 @@ public class Corsi {
     private List<Tag> tags = new ArrayList<>();
 
     @ManyToMany(mappedBy = "corsi")
-    private List<Insegnanti> insegnantis = new ArrayList<>();
+    private List <Insegnanti> insegnantis = new ArrayList<>();
+
+    public List<Insegnanti> getInsegnantis() {
+        return insegnantis;
+    }
+
+    public void setInsegnantis(List<Insegnanti> insegnantis) {
+        this.insegnantis = insegnantis;
+    }
 
     @Column(name = "num_visual", nullable = false)
     private Long numVisual;
@@ -57,14 +67,6 @@ public class Corsi {
 
     public void setNumVisual(Long numVisual) {
         this.numVisual = numVisual;
-    }
-
-    public List<Insegnanti> getInsegnantis() {
-        return insegnantis;
-    }
-
-    public void setInsegnantis(List<Insegnanti> insegnantis) {
-        this.insegnantis = insegnantis;
     }
 
     public List<Tag> getTags() {
