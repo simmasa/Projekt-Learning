@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.projekt.model.Insegnanti;
-import com.example.projekt.model.Prenotazioni;
+import com.example.projekt.model.Insegnante;
+import com.example.projekt.model.Prenotazione;
 import com.example.projekt.repository.InsegnantiRepository;
 import com.example.projekt.repository.PrenotazioniRepository;
 
@@ -40,9 +40,9 @@ public class InsegnantiController {
 	@GetMapping("/detail/{id}")
 	public String insegnantiDetail(Model model, @PathVariable(name = "id") Integer id) {
 
-		Optional<Insegnanti> queryResult = repo.findById(id);
+		Optional<Insegnante> queryResult = repo.findById(id);
 		if (queryResult.isPresent()) {
-			Insegnanti insegnanti = queryResult.get();
+			Insegnante insegnanti = queryResult.get();
 			model.addAttribute("insegnanti", insegnanti);
 			return "insegnantiDetail";
 		} else {
@@ -53,13 +53,13 @@ public class InsegnantiController {
 
 	@GetMapping("/detail/{id}/prenota")
 	public String prenotazioniForm(@PathVariable("id") Integer insegnantiId, Model model) {
-		model.addAttribute("Prenotazioni", new Prenotazioni());
+		model.addAttribute("Prenotazioni", new Prenotazione());
 		model.addAttribute("insegnanti", repo.findById(insegnantiId).get());
 		return "prenotazioni";
 	}
 
 	@PostMapping("/detail/{id}/prenota/save")
-	public String save(@Valid @ModelAttribute("Prenotazioni") Prenotazioni formPrenotazioni,
+	public String save(@Valid @ModelAttribute("Prenotazioni") Prenotazione formPrenotazioni,
 			@PathVariable("id") Integer iId, BindingResult error) {
 
 		if (error.hasErrors()) {
