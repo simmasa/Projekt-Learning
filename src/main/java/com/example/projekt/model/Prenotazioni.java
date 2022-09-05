@@ -1,67 +1,75 @@
 package com.example.projekt.model;
 
-import javax.persistence.*;
 import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "prenotazioni")
 public class Prenotazioni {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    @Column(name = "email_prenonato", nullable = false)
-    private String emailPrenonato;
+	@Column(name = "email_prenonato", nullable = false)
+	private String emailPrenonato;
 
-    @Column(name = "data_prenotazione", nullable = false)
-    private Date dataPrenotazione;
+	@Column(name = "data_prenotazione", nullable = false)
+	private Date dataPrenotazione;
 
-    @Column(name = "slot_orari", nullable = false, length = 5)
-    private String slotOrari;
+	@Column(name = "slot_orari", nullable = false, length = 5)
+	private String slotOrari;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "insegnanti_id", nullable = false)
-    private Insegnanti insegnanti;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "insegnanti_id", nullable = false)
+	private Insegnanti insegnanti;
 
-    public Insegnanti getInsegnanti() {
-        return insegnanti;
-    }
+	public Insegnanti getInsegnanti() {
+		return insegnanti;
+	}
 
-    public void setInsegnanti(Insegnanti insegnanti) {
-        this.insegnanti = insegnanti;
-    }
+	public void setInsegnanti(Insegnanti insegnanti) {
+		this.insegnanti = insegnanti;
+	}
 
-    public String getSlotOrari() {
-        return slotOrari;
-    }
+	public String getSlotOrari() {
+		return slotOrari;
+	}
 
-    public void setSlotOrari(String slotOrari) {
-        this.slotOrari = slotOrari;
-    }
+	public void setSlotOrari(String slotOrari) {
+		this.slotOrari = slotOrari;
+	}
 
-    public Date getDataPrenotazione() {
-        return dataPrenotazione;
-    }
+	public Date getDataPrenotazione() {
+		return dataPrenotazione;
+	}
 
-    public void setDataPrenotazione(Date dataPrenotazione) {
-        this.dataPrenotazione = dataPrenotazione;
-    }
+	public void setDataPrenotazione(Date dataPrenotazione) {
+		this.dataPrenotazione = dataPrenotazione;
+	}
 
-    public String getEmailPrenonato() {
-        return emailPrenonato;
-    }
+	public String getEmailPrenonato() {
+		return emailPrenonato;
+	}
 
-    public void setEmailPrenonato(String emailPrenonato) {
-        this.emailPrenonato = emailPrenonato;
-    }
+	public void setEmailPrenonato(String emailPrenonato) {
+		this.emailPrenonato = emailPrenonato;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 }
