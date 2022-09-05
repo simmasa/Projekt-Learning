@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-	<th:block th:replace="fragments::metatags(name='insegnanti')"></th:block>
+	<th:block th:replace="fragments::metatags(name='insegnantiDetail')"></th:block>
 </head>
 
 <body>
@@ -101,16 +101,17 @@
 			</table>
 		</div>
 
-	<form>
-  <div class="row">
-  
-   
-    <div class="col">
-      <a class="btn btn-dark " th:href="@{|/insegnanti/detail/${insegnanti.id}/prenota|}">Prenota una lezione privata</a>
-    </div>
-  </div>
+		<form>
+			<div class="row">
 
-</form>
+
+				<div class="col">
+					<a class="btn btn-dark " th:href="@{|/insegnanti/detail/${insegnanti.id}/prenota|}">Prenota una
+						lezione privata</a>
+				</div>
+			</div>
+
+		</form>
 
 </body>
 

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-	<th:block th:replace="fragments::metatags(name='Prenota')"></th:block>
+	<th:block th:replace="fragments::metatags(name='Prenotazioni')"></th:block>
 </head>
 
 <body>
@@ -49,15 +49,16 @@
 	<div class="container">
 		<h1 class="text-center text-secondary ">Prenotazione lezioni</h1>
 
-		<form id="form-prenotazioni" th:object="${Prenotazioni}"
-		 th:action="@{|/insegnanti/detail/${id}/prenota|}" method="POST"
-			class="row">
+		<form id="form-prenotazioni" th:object="${Prenotazioni}" th:action="@{|/insegnanti/detail/${id}/prenota/save|}"
+			method="POST" class="row">
 			<ul class="col-12">
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
 				</li>
 			</ul>
+			<input type="hidden" th:field="*{insegnanti}" th:value="${insegnanti.id}">
+
 			<div class="col-6">
-				<input type="hidden" th:field="*{id}">
+
 				<div class="mb-3">
 					<label class="form-label" for="emailPrenonato">Email Prenotato</label>
 					<input type="text" id="emailPrenonato" placeholder="Inserire Email" class="form-control"
@@ -70,7 +71,7 @@
 				</div>
 
 				<div class="col-6">
-					<input type="hidden" th:field="*{id}">
+
 					<div class="mb-3">
 						<label class="form-label" for="dataPrenotazione">Data Prenotazione</label>
 						<input type="date" id="dataPrenotazione" class="form-control" th:field="*{dataPrenotazione}"
@@ -82,32 +83,31 @@
 						</div>
 					</div>
 
-					<div class="col-12">
-						<input type="hidden" th:field="*{id}">
-						<div class="mb-3">
-							<label class="form-label" for="slotOrari">Slot Orari</label>
-							<select th:field="*{slotOrari}" class="form-select" aria-label="User select">
-								<option value="" selected>Seleziona l'orario della lezione</option>
-								<option value="1" selected>10:00</option>
-								<option value="2" selected>10:30</option>
-								<option value="3" selected>11:00</option>
-								<option value="4" selected>11:30</option>
-								<option value="5" selected>12:00</option>
-								<option value="6" selected>12:30</option>
-								<option value="7" selected>15:00</option>
-								<option value="8" selected>15:30</option>
-								<option value="9" selected>16:00</option>
-								<option value="10" selected>16:30</option>
-								<option value="11" selected>17:00</option>
-							</select>
-						</div>
+
+					<input type="hidden" th:field="*{id}">
+					<div class="mb-3">
+						<label class="form-label" for="slotOrari">Slot Orari</label>
+						<select th:field="*{slotOrari}" class="form-select" aria-label="User select">
+							<option value="" selected>Seleziona l'orario della lezione</option>
+							<option value="1" selected>10:00</option>
+							<option value="2" selected>10:30</option>
+							<option value="3" selected>11:00</option>
+							<option value="4" selected>11:30</option>
+							<option value="5" selected>12:00</option>
+							<option value="6" selected>12:30</option>
+							<option value="7" selected>15:00</option>
+							<option value="8" selected>15:30</option>
+							<option value="9" selected>16:00</option>
+							<option value="10" selected>16:30</option>
+							<option value="11" selected>17:00</option>
+						</select>
+					</div>
 
 
-
-						<div>
-							<button type="submit" class="btn btn-dark">Salva prenotazione</button>
-							<a class="btn btn-dark pl-2" href="/insegnanti">Cancella</a>
-						</div>
+					<div>
+						<button type="submit" class="btn btn-dark">Salva prenotazione</button>
+						<a class="btn btn-dark pl-2" href="/insegnanti">Cancella</a>
+					</div>
 
 		</form>
 

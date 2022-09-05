@@ -54,17 +54,20 @@ public class InsegnantiController {
 	@GetMapping("/detail/{id}/prenota")
 	public String prenotazioniForm(@PathVariable("id") Integer insegnantiId, Model model) {
 		model.addAttribute("Prenotazioni", new Prenotazioni());
+		model.addAttribute("insegnanti", repo.findById(insegnantiId).get());
 		return "prenotazioni";
 	}
 
 	@PostMapping("/detail/{id}/prenota/save")
-	public String save(@Valid @ModelAttribute("Prenotazioni") Prenotazioni formPrenotazioni, BindingResult error) {
+	public String save(@Valid @ModelAttribute("Prenotazioni") Prenotazioni formPrenotazioni,
+			@PathVariable("id") Integer iId, BindingResult error) {
 
 		if (error.hasErrors()) {
 			return "prenotazioni";
 		}
+		formPrenotazioni.setInsegnanti(repo.findById(iId).get());
 		repoPrenotazioni.save(formPrenotazioni);
-		return "redirect:/prenotazioni";
+		return "redirect:/";
 
 	}
 }
