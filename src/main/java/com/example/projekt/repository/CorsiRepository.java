@@ -1,14 +1,13 @@
 package com.example.projekt.repository;
 
-import com.example.projekt.model.Corsi;
+import com.example.projekt.model.Corso;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface CorsiRepository extends CrudRepository<Corsi, Integer> {
-    List<Corsi> findByOrderByNumVisualDesc();
+public interface CorsiRepository extends CrudRepository<Corso, Integer> {
+    List<Corso> findByOrderByNumVisualDesc();
 
-    List<Corsi> findByCategorie_NomeLikeIgnoreCase(String nome);
+    List<Corso> findByCategorie_NomeLikeIgnoreCase(String nome);
 
 }

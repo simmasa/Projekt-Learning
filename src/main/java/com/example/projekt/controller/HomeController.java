@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.projekt.model.Corsi;
+import com.example.projekt.model.Corso;
 import com.example.projekt.repository.CapitoloRepository;
 import com.example.projekt.repository.CorsiRepository;
 
@@ -31,9 +31,9 @@ public class HomeController {
 		return "home";
 	}
 
-	public List<Corsi> topCorsi() {
-		List<Corsi> completa = corsiRepo.findByOrderByNumVisualDesc();
-		List<Corsi> top = new ArrayList<Corsi>();
+	public List<Corso> topCorsi() {
+		List<Corso> completa = corsiRepo.findByOrderByNumVisualDesc();
+		List<Corso> top = new ArrayList<Corso>();
 		for (int i = 0; i < 4; i++) {
 			top.add(completa.get(i));
 		}

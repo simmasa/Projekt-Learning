@@ -1,7 +1,7 @@
 package com.example.projekt.repository;
 
-import com.example.projekt.model.Categorie;
+import com.example.projekt.model.Categoria;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CategorieRepository extends CrudRepository<Categorie, Integer> {
+public interface CategorieRepository extends CrudRepository<Categoria, Integer> {
 }

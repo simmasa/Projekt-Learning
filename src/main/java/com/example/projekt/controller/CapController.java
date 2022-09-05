@@ -1,7 +1,6 @@
 package com.example.projekt.controller;
 
 import com.example.projekt.model.Capitolo;
-import com.example.projekt.model.Corsi;
 import com.example.projekt.repository.CapitoloRepository;
 import com.example.projekt.repository.CorsiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

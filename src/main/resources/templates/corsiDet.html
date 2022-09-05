@@ -43,7 +43,7 @@
                           <th scope="row" th:text="${cap.numeroCapitolo}"></th>
                           <td th:text="${cap.titolo}"></td>
                           <td th:text="${cap.descrizione}"></td>
-                          <td class="text-end"><a class="btn btn-warning" th:href="@{|/corsi/${corso.id}/${cap.id}|}">Avvia</a></td>
+                          <td class="text-end"><a class="btn btn-warning" th:href="@{|/corsi/${corso.id}/${cap.numeroCapitolo}|}">Avvia</a></td>
                       </tr>
                   </tbody>
                 </table>

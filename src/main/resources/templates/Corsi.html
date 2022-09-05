@@ -12,35 +12,30 @@
                 </div>
                 <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-                    <div class="col" th:each="corso : ${corsiTop}">
-                      <a th:href="@{|/corsi/${corso.id}|}" class="linkN"><div class="card shadow-sm">
-                        <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/0.jpg'}" alt="thumbnail Youtube">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${corso.titolo}"></h5>
-                            <p class="card-text">Categoria: <span th:text="${corso.categorie.nome}"></span></p>
-                            <p class="card-text">Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
-                            <p class="card-text">Durata: <span th:text="${corso.durata}"></span></p>
-                            <ul style="list-style: none; padding-left: 0">
-                                <li th:each="t : ${corso.tags}" th:text="${t.nome}" style="display: inline"></li>
-                            </ul>
+                    <div class="col" th:each="cors : ${corsiTop}">
+                        <th:block th:insert="fragments :: cardB(${cors.id},
+                        ${cors.capitoli[0].url},
+                        ${cors.titolo}, ${cors.categorie.nome},
+                        ${cors.livelloDifficolta},${cors.durata},
+                        ${cors.tags})">
+                        </th:block>
                         </div>
-                      </div></a>
-                    </div>
+                       </div>
+                      </a>
                 </div>
             </div>
-            </div>
             <div class="categorie">
-                    <div id="cats" class="section-title my-3">
-                          <h2>Categorie</h2>
-                    </div>
-                    <div class="container">
+                <div id="cats" class="section-title my-3">
+                    <h2>Categorie</h2>
+                </div>
+                <div class="container">
                         <!-- form action="/corsi">
                             <a type="button" class="btn btn-light" th:href="@{/corsi}">Tutte</a>
                             <button class="btn btn-light" name="cat" type="submit" th:each="cat : ${categorie}" th:value="${cat.nome}" th:text="${cat.nome}"></button>
                         </form -->
                         <a type="button" class="btn btn-light" th:href="@{/corsi#cats}">Tutte</a>
                         <a type="button" class="btn btn-light" th:href="@{|/corsi&#63cat=${cat.nome}#cats|}" th:each="cat : ${categorie}" th:text="${cat.nome}"></a>
-                    </div>
+                </div>
             </div>
             <div class="all">
                 <div class="section-title my-3">
@@ -49,23 +44,12 @@
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                         <div class="col" th:each="corso : ${corsi}">
-                          <a th:href="@{|/corsi/${corso.id}|}" class="linkN">
-                              <div class="card shadow-sm">
-                            <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/0.jpg'}" alt="thumbnail Youtube">
-                
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${corso.titolo}"></h5>
-                                <p class="card-text">Categoria: <span th:text="${corso.categorie.nome}"></span></p>
-                                <p class="card-text">Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
-                                <p class="card-text">Durata: <span th:text="${corso.durata}"></span></p>
-                                <ul style="list-style: none; padding-left: 0">
-                                    <li th:each="t : ${corso.tags}" th:text="${t.nome}" style="display: inline">
-    
-                                    </li>
-                                </ul>
-                            </div>
-                          </div>
-                          </a>
+                            <th:block th:insert="fragments :: cardB(${corso.id},
+                            ${corso.capitoli[0].url},
+                            ${corso.titolo}, ${corso.categorie.nome},
+                            ${corso.livelloDifficolta},${corso.durata},
+                            ${corso.tags})">
+                            </th:block>
                         </div>
                       </div>    
             </div>

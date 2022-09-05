@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "prenotazioni")
-public class Prenotazioni {
+public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -22,13 +22,13 @@ public class Prenotazioni {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "insegnanti_id", nullable = false)
-    private Insegnanti insegnanti;
+    private Insegnante insegnanti;
 
-    public Insegnanti getInsegnanti() {
+    public Insegnante getInsegnanti() {
         return insegnanti;
     }
 
-    public void setInsegnanti(Insegnanti insegnanti) {
+    public void setInsegnanti(Insegnante insegnanti) {
         this.insegnanti = insegnanti;
     }
 

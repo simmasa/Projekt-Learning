@@ -40,7 +40,9 @@
       .logoF {
       font-family: 'Tomorrow', sans-serif;
       }
-
+      .card {
+      min-height: 100%;
+      }
     </style>
     </th:block>
 </head>
@@ -106,7 +108,32 @@
     </header>
 
     <div class="b-example-divider"></div>
+
+    
+
+    <th:block th:fragment="cardB (corsoId,corsoURL,corsoT,corsoN,corsoLD,corsoD,corsoTa)">
+        <a th:href="@{|/corsi/${corsoId}|}" class="linkN">
+            <div class="card shadow-sm">
+                <img th:src="@{'https://img.youtube.com/vi/'+ ${corsoURL} +'/0.jpg'}" alt="thumbnail Youtube">
+                <div class="card-body">
+                    <div class="tiolo border-bottom">
+                        <h5 class="card-title" th:text="${corsoT}"></h5>
+                    </div>
+                    <p class="card-text">Categoria: <span th:text="${corsoN}"></span></p>
+                    <p class="card-text">Livello di Difficoltà: <span th:text="${corsoLD}"></span></p>
+                    <p class="card-text">Durata: <span th:text="${corsoD}"></span></p>
+                    <ul style="list-style: none; padding-left: 0">
+                        <li th:each="t : ${corsoTa}" th:text="${t.nome}" style="display: inline">
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </a>
+    </th:block>
+
 </main>
+
 
 
 <script src="./Headers · Bootstrap v5.2_files/bootstrap.bundle.min.js.download" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

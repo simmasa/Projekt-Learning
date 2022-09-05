@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categorie")
-public class Categorie {
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -16,13 +16,13 @@ public class Categorie {
     private String nome;
 
     @OneToMany(mappedBy = "categorie", orphanRemoval = true)
-    private List<Corsi> corsi = new ArrayList<>();
+    private List<Corso> corsi = new ArrayList<>();
 
-    public List<Corsi> getCorsi() {
+    public List<Corso> getCorsi() {
         return corsi;
     }
 
-    public void setCorsi(List<Corsi> corsi) {
+    public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
 

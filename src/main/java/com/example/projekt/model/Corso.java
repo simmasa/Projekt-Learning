@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "corsi")
-public class Corsi {
+public class Corso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,7 +35,7 @@ public class Corsi {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "categorie_id", nullable = false)
-    private Categorie categorie;
+    private Categoria categorie;
 
     @OneToMany(mappedBy = "corsi", orphanRemoval = true)
     private List<Capitolo> capitoli = new ArrayList<>();
@@ -51,13 +51,13 @@ public class Corsi {
     @JoinTable(name = "insegnanti_corsis",
             joinColumns = @JoinColumn(name = "corsis_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "insegnanti_id", referencedColumnName = "id"))
-    private List <Insegnanti> insegnantis = new ArrayList<>();
+    private List <Insegnante> insegnantis = new ArrayList<>();
 
-    public List<Insegnanti> getInsegnantis() {
+    public List<Insegnante> getInsegnantis() {
         return insegnantis;
     }
 
-    public void setInsegnantis(List<Insegnanti> insegnantis) {
+    public void setInsegnantis(List<Insegnante> insegnantis) {
         this.insegnantis = insegnantis;
     }
 
@@ -90,11 +90,11 @@ public class Corsi {
     }
 
 
-    public Categorie getCategorie() {
+    public Categoria getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(Categorie categorie) {
+    public void setCategorie(Categoria categorie) {
         this.categorie = categorie;
     }
 

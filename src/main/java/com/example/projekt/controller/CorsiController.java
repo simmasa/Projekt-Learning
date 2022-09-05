@@ -1,6 +1,6 @@
 package com.example.projekt.controller;
 
-import com.example.projekt.model.Corsi;
+import com.example.projekt.model.Corso;
 import com.example.projekt.repository.CategorieRepository;
 import com.example.projekt.repository.CorsiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/corsi")
-public class SitiController {
+public class CorsiController {
 
     @Autowired
     public CorsiRepository corsiRepo;
@@ -30,7 +30,7 @@ public class SitiController {
     @GetMapping
     public String corsiQuery(@RequestParam(name = "cat",required = false) String cat, Model m) {
         if (cat!=null) {
-            List<Corsi> search = corsiRepo.findByCategorie_NomeLikeIgnoreCase(cat);
+            List<Corso> search = corsiRepo.findByCategorie_NomeLikeIgnoreCase(cat);
             m.addAttribute("corsi", search);
         }else {
             m.addAttribute("corsi", corsiRepo.findAll());
@@ -42,7 +42,7 @@ public class SitiController {
 
     @GetMapping("/{id}")
     public String corsiDetail (@PathVariable("id") Integer corsoId, Model m) {
-        Optional<Corsi> corso = corsiRepo.findById(corsoId);
+        Optional<Corso> corso = corsiRepo.findById(corsoId);
         if (corso.isPresent()){
             m.addAttribute("corso", corso.get());
             incCorsoVis(corso.get());
@@ -52,15 +52,15 @@ public class SitiController {
         return "corsiDet";
     }
 
-    public List<Corsi> topCorsi(int numCorsi) {
-        List<Corsi> completa = corsiRepo.findByOrderByNumVisualDesc();
-        List<Corsi> top = new ArrayList<Corsi>();
+    public List<Corso> topCorsi(int numCorsi) {
+        List<Corso> completa = corsiRepo.findByOrderByNumVisualDesc();
+        List<Corso> top = new ArrayList<Corso>();
         for (int i=0;i<numCorsi;i++) {
             top.add(completa.get(i));
         }
         return top;
     }
-     public void incCorsoVis(Corsi corso) {
+     public void incCorsoVis(Corso corso) {
         long visual = corso.getNumVisual();
         visual+=1;
         corso.setNumVisual(visual);

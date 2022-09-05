@@ -25,13 +25,13 @@ public class Capitolo {
 
     @ManyToOne
     @JoinColumn(name = "corsi_id")
-    private Corsi corsi;
+    private Corso corsi;
 
-    public Corsi getCorsi() {
+    public Corso getCorsi() {
         return corsi;
     }
 
-    public void setCorsi(Corsi corsi) {
+    public void setCorsi(Corso corsi) {
         this.corsi = corsi;
     }
 

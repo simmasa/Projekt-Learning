@@ -1,8 +1,8 @@
 package com.example.projekt.controller;
 
 
-import com.example.projekt.model.Corsi;
-import com.example.projekt.model.Insegnanti;
+import com.example.projekt.model.Corso;
+import com.example.projekt.model.Insegnante;
 import com.example.projekt.repository.CategorieRepository;
 import com.example.projekt.repository.CorsiRepository;
 import com.example.projekt.repository.InsegnantiRepository;
@@ -40,7 +40,7 @@ public class AdminController {
  //MAPPING DEL FORM INSEGNANTI
  @GetMapping("/add")
     public String add(Model model) {
-     model.addAttribute("AddInsegnanti", new Insegnanti());
+     model.addAttribute("AddInsegnanti", new Insegnante());
      return "form";
     }
 
@@ -58,7 +58,7 @@ public class AdminController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnanti formIns, BindingResult error) {
+    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error) {
 
         if(error.hasErrors()) {
             return "form";
@@ -74,7 +74,7 @@ public class AdminController {
     public String addCorsi(Model model) {
         model.addAttribute("Categorie", cat.findAll());
         model.addAttribute("AddInsegnanti", ins.findAllByOrderByNome());
-        model.addAttribute("AddCorsi", new Corsi());
+        model.addAttribute("AddCorsi", new Corso());
         return "formCorsi";
     }
 
@@ -93,7 +93,7 @@ public class AdminController {
     }
 
     @PostMapping("/saveCorsi")
-    public String saveCorsi(@ModelAttribute("AddCorsi") Corsi formCorsi, Model model) {
+    public String saveCorsi(@ModelAttribute("AddCorsi") Corso formCorsi, Model model) {
         formCorsi.setDataCreazione(Date.valueOf(LocalDate.now()));
         formCorsi.setNumVisual(0L);
         corsi.save(formCorsi);

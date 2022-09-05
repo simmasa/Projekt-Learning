@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "insegnanti")
-public class Insegnanti {
+public class Insegnante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,25 +27,25 @@ public class Insegnanti {
 
 
     @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
-    private List<Prenotazioni> prenotazioni = new ArrayList<>();
+    private List<Prenotazione> prenotazioni = new ArrayList<>();
 
     @ManyToMany(mappedBy = "insegnantis")
-    private List<Corsi> corsi = new ArrayList<>();
+    private List<Corso> corsi = new ArrayList<>();
 
-    public List<Corsi> getCorsi() {
+    public List<Corso> getCorsi() {
         return corsi;
     }
 
-    public void setCorsi(List<Corsi> corsi) {
+    public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
 
 
-    public List<Prenotazioni> getPrenotazioni() {
+    public List<Prenotazione> getPrenotazioni() {
         return prenotazioni;
     }
 
-    public void setPrenotazioni(List<Prenotazioni> prenotazioni) {
+    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
         this.prenotazioni = prenotazioni;
     }
 
