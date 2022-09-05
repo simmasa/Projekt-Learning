@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments :: metatags(name=${capitolo.titolo})">
+</head>
+
+<body>
+    <header th:replace="fragments :: header"></header>
+    </main>
+    <div class="d-flex">
+        <div class="container p-0">
+            <div class="wrap border-bottom">
+                <iframe width="560" height="315" th:src=@{'https://www.youtube.com/embed/'+${capitolo.url}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="testo p-3">
+                <h2>Cap.<span th:text="${capitolo.numeroCapitolo}"></span> - <span th:text="${capitolo.titolo}"></span> </h2>
+                <p th:text="${capitolo.descrizione}"></p>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-primary" th:classappend="${capitolo.numeroCapitolo>=2} ? abled : disabled"
+                       th:href="@{|/corsi/${capitolo.corsi.id}/${capitolo.numeroCapitolo-1}|}">Capitolo Precedente</a>
+                    <a class="btn btn-primary"  th:classappend="${capitolo.numeroCapitolo < capitolo.corsi.capitoli.size} ? able : disabled"
+                       th:href="@{|/corsi/${capitolo.corsi.id}/${capitolo.numeroCapitolo+1}|}">Capitolo Successivo</a>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar -->
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white border vh-100" style="width: 20%">
+                <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">Lista Capitoli</span>
+                </div>
+                <div class="list-group list-group-flush border-bottom scrollarea">
+                <a th:href="@{|/corsi/${cap.corsi.id}/${cap.numeroCapitolo}|}" class="list-group-item list-group-item-action py-3 lh-sm"
+                   aria-current="true" th:each="cap : ${capitolo.corsi.capitoli}">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong class="mb-1" th:text="${cap.titolo}"></strong>
+                    </div>
+                    <div class="col-10 mb-1 small" th:text="${cap.descrizione}"></div>
+                </a>
+                </div>
+        </div>
+    </div>
+        <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    
+          <script src="sidebars.js"></script>
+      
+    
+    </body>
+</html>
