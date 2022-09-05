@@ -43,7 +43,7 @@
 			</path>
 		</symbol>
 	</svg>
-	<header <th:block th:replace="fragments::header">
+	<header> <th:block th:replace="fragments::header">
 		</th:block>
 	</header>
 	<div class="container">
@@ -87,19 +87,19 @@
 					<input type="hidden" th:field="*{id}">
 					<div class="mb-3">
 						<label class="form-label" for="slotOrari">Slot Orari</label>
-						<select th:field="*{slotOrari}" class="form-select" aria-label="User select">
+						<select th:field="*{slotOrari}" class="form-select" aria-label="User select" id="slotOrari">
 							<option value="" selected>Seleziona l'orario della lezione</option>
-							<option value="1" selected>10:00</option>
-							<option value="2" selected>10:30</option>
-							<option value="3" selected>11:00</option>
-							<option value="4" selected>11:30</option>
-							<option value="5" selected>12:00</option>
-							<option value="6" selected>12:30</option>
-							<option value="7" selected>15:00</option>
-							<option value="8" selected>15:30</option>
-							<option value="9" selected>16:00</option>
-							<option value="10" selected>16:30</option>
-							<option value="11" selected>17:00</option>
+							<option value="1" >10:00</option>
+							<option value="2" >10:30</option>
+							<option value="3" >11:00</option>
+							<option value="4" >11:30</option>
+							<option value="5" >12:00</option>
+							<option value="6" >12:30</option>
+							<option value="7" >15:00</option>
+							<option value="8" >15:30</option>
+							<option value="9" >16:00</option>
+							<option value="10" >16:30</option>
+							<option value="11" >17:00</option>
 						</select>
 					</div>
 
