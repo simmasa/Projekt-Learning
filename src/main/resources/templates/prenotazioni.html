@@ -50,7 +50,7 @@
 		<h1 class="text-center text-secondary ">Prenotazione lezioni</h1>
 
 		<form id="form-prenotazioni" th:object="${Prenotazioni}"
-		 th:action="@{|/insegnanti/detail/${insegnanti.id}/prenota/save|}" method="POST"
+		 th:action="@{|/insegnanti/detail/${id}/prenota|}" method="POST"
 			class="row">
 			<ul class="col-12">
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
