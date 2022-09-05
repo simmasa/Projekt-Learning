@@ -29,10 +29,7 @@ public class Insegnanti {
     @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
     private List<Prenotazioni> prenotazioni = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "insegnanti_corsis",
-            joinColumns = @JoinColumn(name = "insegnanti_id"),
-            inverseJoinColumns = @JoinColumn(name = "corsis_id"))
+    @ManyToMany(mappedBy = "insegnantis")
     private List<Corsi> corsi = new ArrayList<>();
 
     public List<Corsi> getCorsi() {
