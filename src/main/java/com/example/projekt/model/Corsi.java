@@ -47,7 +47,10 @@ public class Corsi {
             inverseJoinColumns = @JoinColumn(name = "tags_id"))
     private List<Tag> tags = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "corsi")
+    @ManyToMany
+    @JoinTable(name = "insegnanti_corsis",
+            joinColumns = @JoinColumn(name = "corsis_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "insegnanti_id", referencedColumnName = "id"))
     private List <Insegnanti> insegnantis = new ArrayList<>();
 
     public List<Insegnanti> getInsegnantis() {
