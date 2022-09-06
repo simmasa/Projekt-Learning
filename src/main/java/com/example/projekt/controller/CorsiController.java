@@ -55,8 +55,8 @@ public class CorsiController {
 
     @GetMapping("/search")
     public String corsiSearch(@RequestParam(name = "search",required = false) String request,Model m) {
-        if (request!=null)
-            m.addAttribute("list",cleanSearch(request));
+        //m.addAttribute("list",cleanSearch(request));
+        System.out.println(request);
         return"search";
     }
 
@@ -74,7 +74,17 @@ public class CorsiController {
         corso.setNumVisual(visual);
         corsiRepo.save(corso);
      }
-     public List<Corso> cleanSearch(String request){
+
+     public List<String> cleanSearchReq(String req) {
+         String[] parole = req.split(" ");
+         List<String> cleanSearch = new ArrayList<String>();
+         for (int i =0;i< parole.length;i++) {
+             if (parole[i].length()<3)
+                 cleanSearch.add(parole[i]);
+         }
+         return cleanSearch;
+     }
+     public List<Corso> cleanSearchResult(String request){
         List<Corso> name = corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(request);
         List<Corso> prof = corsiRepo.findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
         List<Corso> cat = corsiRepo.findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
