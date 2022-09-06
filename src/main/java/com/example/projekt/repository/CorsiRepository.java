@@ -13,6 +13,11 @@ public interface CorsiRepository extends CrudRepository<Corso, Integer> {
 
     List<Corso> findByDataCreazioneAfterOrderByDataCreazioneDesc(Date dataCreazione);
 
+    List<Corso> findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(String titolo);
+
+    List<Corso> findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(String nome);
+
+    List<Corso> findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(String nome);
 
 
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments :: metatags(name='Corsi')">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<main>
+  <div class="container my-3">
+    <h2 class="text-center">Ricerca corsi</h2>
+    <form class="form-control border-0" th:action="@{/corsi/search}">
+      <div class="input-group mb-3">
+        <input th:name="search" type="text" class="form-control" placeholder="Inserisci quello che vuoi cercare" aria-label="Searchbar" aria-describedby="searchbar">
+        <button class="btn btn-outline-secondary" type="button" id="searchbtn">Cerca</button>
+      </div>
+    </form>
+    <div class="search">
+      <div class="section-title my-3">
+        <h2>I risultati della tua ricerca</h2>
+      </div>
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          <div class="col" th:each="corso : ${list}">
+            <th:block th:insert="fragments :: cardB(${corso.id},
+                            ${corso.capitoli[0].url},
+                            ${corso.titolo}, ${corso.categorie.nome},
+                            ${corso.livelloDifficolta},${corso.durata},
+                            ${corso.tags})">
+            </th:block>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

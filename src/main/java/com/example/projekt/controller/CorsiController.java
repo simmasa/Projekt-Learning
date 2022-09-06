@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -52,6 +53,13 @@ public class CorsiController {
         return "corsiDet";
     }
 
+    @GetMapping("/search")
+    public String corsiSearch(@RequestParam(name = "search",required = false) String request,Model m) {
+        if (request!=null)
+            m.addAttribute("list",cleanSearch(request));
+        return"search";
+    }
+
     public List<Corso> topCorsi(int numCorsi) {
         List<Corso> completa = corsiRepo.findByOrderByNumVisualDesc();
         List<Corso> top = new ArrayList<Corso>();
@@ -65,5 +73,22 @@ public class CorsiController {
         visual+=1;
         corso.setNumVisual(visual);
         corsiRepo.save(corso);
+     }
+     public List<Corso> cleanSearch(String request){
+        List<Corso> name = corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(request);
+        List<Corso> prof = corsiRepo.findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
+        List<Corso> cat = corsiRepo.findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
+
+         for (Corso c : name) {
+             prof.removeIf(p -> Objects.equals(p.getId(), c.getId()));
+             cat.removeIf(ca -> Objects.equals(ca.getId(), c.getId()));
+         }
+         for (Corso p : prof) {
+             cat.removeIf(ca -> Objects.equals(ca.getId(), p.getId()));
+         }
+         List<Corso> result = name;
+         result.addAll(prof);
+         result.addAll(cat);
+         return result;
      }
 }
