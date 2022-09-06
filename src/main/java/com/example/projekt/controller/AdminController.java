@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,10 +43,10 @@ public class AdminController {
      model.addAttribute("topCorsi", corsi.findByOrderByNumVisualDesc());
      model.addAttribute("ultimi",corsi.findByDataCreazioneAfterOrderByDataCreazioneDesc(Date.valueOf(LocalDate.now().minusDays(7))));
 
-     Optional<Prenotazione> req = pre.findByInsegnanti_IdOrderByDataPrenotazioneAsc(iId);
-     if (req.isPresent()) {
-         model.addAttribute("preno",req.get());
-     }
+     List<Prenotazione> req = pre.findByInsegnanti_IdOrderByDataPrenotazioneAsc(iId);
+
+     model.addAttribute("preno",req);
+
      return"admin";
 
  }
