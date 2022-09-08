@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.example.projekt.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class InsegnantiController {
 
 	@Autowired
 	private PrenotazioniRepository repoPrenotazioni;
+
+	@Autowired
+	private ImageService service;
 
 	@GetMapping
 	public String insegnantiList(Model model) {

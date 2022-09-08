@@ -71,6 +71,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error) {
 

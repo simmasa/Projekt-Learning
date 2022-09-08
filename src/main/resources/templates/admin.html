@@ -116,6 +116,7 @@
                 <td class="ms-5 text-center">
                     <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/edit/${ins.getId}|}"><i class="bi bi-pen text-white"></i></a>
                     <a class="btn btn-dark" title="Delete" th:href="@{|/admin/del/${ins.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
+                    <a class="btn btn-dark"  title="Add Photo" th:href="@{|/image/${ins.getId}|}"><i class="bi bi-images"></i></a>
                 </td>
             </tr>
             </tbody>
