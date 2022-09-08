@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/corsi")
@@ -54,9 +55,13 @@ public class CorsiController {
     }
 
     @GetMapping("/search")
-    public String corsiSearch(@RequestParam(name = "search",required = false) String request,Model m) {
-        //m.addAttribute("list",cleanSearch(request));
-        System.out.println(request);
+    public String corsiSearch(@RequestParam(name = "title",required = false) String titleReq,
+                              @RequestParam(name = "doc",required = false) String docReq,
+                              @RequestParam(name = "LD",required = false) Integer LDReq,
+                              @RequestParam(name = "Cat",required = false) String CatReq,
+                              Model m) {
+        m.addAttribute("list",advSearchResult(titleReq,docReq,LDReq,CatReq));
+
         return"search";
     }
 
@@ -75,16 +80,14 @@ public class CorsiController {
         corsiRepo.save(corso);
      }
 
-     public List<String> cleanSearchReq(String req) {
-         String[] parole = req.split(" ");
-         List<String> cleanSearch = new ArrayList<String>();
-         for (int i =0;i< parole.length;i++) {
-             if (parole[i].length()<3)
-                 cleanSearch.add(parole[i]);
-         }
-         return cleanSearch;
-     }
-     public List<Corso> cleanSearchResult(String request){
+//     public String[] splitQueryString(String req) {
+//        if (req != null){
+//            String[] parole = req.split(" ");
+//            return parole;
+//        }
+//        return -1;
+//     }
+     public List<Corso> simSearchResult(String request){
         List<Corso> name = corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(request);
         List<Corso> prof = corsiRepo.findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
         List<Corso> cat = corsiRepo.findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
@@ -101,4 +104,52 @@ public class CorsiController {
          result.addAll(cat);
          return result;
      }
+    public List<Corso> advSearchResult(String title,String doc,Integer lvl,String catReq){
+        List<Corso> inseg =new ArrayList<Corso>();
+
+        if (doc != null) {
+            String[] nomeCog = doc.split(" ");
+            for (String i:
+                    nomeCog) {
+                inseg.addAll(corsiRepo.findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(i));
+                inseg.addAll(corsiRepo.findByInsegnantis_CognomeLikeIgnoreCaseOrderByNumVisualAsc(i));
+            }
+        }
+
+        List<Corso> titleList = new ArrayList<Corso>();
+        if (title != null) {
+            String[] searchWord = title.split(" ");
+            for (String i:
+                 searchWord) {
+                if (i.length()>2){
+                    titleList.addAll(corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(i));
+                }
+            }
+        }
+
+
+        //List<Corso> name = corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(title);
+
+
+        List<Corso> cat = corsiRepo.findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(catReq);
+        List<Corso> diff = corsiRepo.findByLivelloDifficolta(lvl);
+
+
+        if (title!= null && title.isBlank()) {
+
+            assert doc != null;
+            if ((!doc.isEmpty() || !catReq.isEmpty() || lvl != null)){
+                titleList.removeAll(titleList);
+            }
+        }
+
+        List<Corso> bigList = titleList;
+        bigList.addAll(inseg);
+        bigList.addAll(cat);
+        bigList.addAll(diff);
+
+        List<Corso> cleanList = bigList.stream().distinct().collect(Collectors.toList());
+
+        return cleanList;
+}
 }

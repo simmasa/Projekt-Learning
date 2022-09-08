@@ -6,13 +6,48 @@
 <header th:replace="fragments :: header"></header>
 <main>
   <div class="container my-3">
+    <div>
     <h2 class="text-center">Ricerca corsi</h2>
-    <form class="form-control border-0" th:action="@{/corsi/search}">
+
+    <!--form class="form-control border-0" th:action="@{/corsi/search}">
       <div class="input-group mb-3">
         <input th:name="search" type="text" class="form-control" placeholder="Inserisci quello che vuoi cercare" aria-label="Searchbar" aria-describedby="searchbar">
         <button class="btn btn-outline-secondary" type="submit" id="searchbtn">Cerca</button>
       </div>
+    </form -->
+    </div>
+    <div class="">
+      <h4 class="mb-3">Ricerca avanzata</h4>
+        <form class="form-control border-0" th:action="@{/corsi/search}">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="titolo" class="form-label">Titolo</label>
+              <input type="text" class="form-control" id="titolo" placeholder="Java" th:name="title">
+            </div>
+
+            <div class="col-sm-6">
+              <label for="doc" class="form-label">Insegnante</label>
+              <input type="text" class="form-control" id="doc" placeholder="Giancarlo Lauretti" th:name="doc">
+            </div>
+
+            <div class="col-6">
+              <label for="LD" class="form-label">Livello di difficoltà</label>
+                <input type="text" class="form-control" id="LD" placeholder="1-5" th:name="LD">
+            </div>
+
+            <div class="col-6">
+              <label for="cat" class="form-label">Categoria</label>
+              <input type="text" class="form-control" id="cat" placeholder="Informatica,Cucina...." th:name="Cat">
+            </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Cerca</button>
+          </div>
+        </form>
+      </div>
     </form>
+
     <div class="search">
       <div class="section-title my-3">
         <h2>I risultati della tua ricerca</h2>

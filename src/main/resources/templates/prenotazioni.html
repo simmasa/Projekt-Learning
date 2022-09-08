@@ -11,14 +11,21 @@
 	</header>
 	<div class="container">
 		<h1 class="text-center text-secondary ">Prenotazione lezioni</h1>
-
-		<form id="form-prenotazioni" th:object="${Prenotazioni}" th:action="@{|/insegnanti/detail/${id}/prenota/save|}"
-			method="POST" class="row">
-			<ul class="col-12">
+		<form id="form-prenotazioni"
+			  th:object="${prenotazione}"
+			  th:action="@{|/insegnanti/detail/${id}/prenota/save|}"
+			  method="POST" class="row"
+		>
+			<!-- ul class="col-12">
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
 				</li>
-			</ul>
-			<input type="hidden" th:field="*{insegnanti}" th:value="${insegnanti.id}">
+			</ul -->
+			<div th:if="${#fields.hasAnyErrors()}">
+				<ul>
+					<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+				</ul>
+			</div>
+
 
 			<div class="col-6">
 
@@ -26,11 +33,11 @@
 					<label class="form-label" for="emailPrenonato">Email Prenotato</label>
 					<input type="text" id="emailPrenonato" placeholder="Inserire Email" class="form-control"
 						th:field="*{emailPrenonato} " th:errorClass="is-invalid">
-					<div th:if="${#fields.hasErrors('emailPrenonato')}" class="invalid-feedback">
+					<!-- div th:if="${#fields.hasErrors('emailPrenonato')}" class="invalid-feedback">
 						<ul>
 							<li th:each="err : ${#fields.errors('emailPrenonato')}" th:text="${err}">
 						</ul>
-					</div>
+					</div -->
 				</div>
 
 				<div class="col-6">
@@ -39,11 +46,11 @@
 						<label class="form-label" for="dataPrenotazione">Data Prenotazione</label>
 						<input type="date" id="dataPrenotazione" class="form-control" th:field="*{dataPrenotazione}"
 							th:errorClass="is-invalid">
-						<div th:if="${#fields.hasErrors('dataPrenotazione')}" class="invalid-feedback">
+						<!-- div th:if="${#fields.hasErrors('dataPrenotazione')}" class="invalid-feedback">
 							<ul>
 								<li th:each="err : ${#fields.errors('dataPrenotazione')}" th:text="${err}">
 							</ul>
-						</div>
+						</div -->
 					</div>
 
 
