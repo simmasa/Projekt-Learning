@@ -21,16 +21,23 @@ public class Insegnante {
     @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
-
-
     @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
     private List<Prenotazione> prenotazioni = new ArrayList<>();
 
     @ManyToMany(mappedBy = "insegnantis")
     private List<Corso> corsi = new ArrayList<>();
+
+    @OneToMany(mappedBy = "insegnante", orphanRemoval = true)
+    private List<Image> foto = new ArrayList<>();
+
+    public List<Image> getFoto() {
+        return foto;
+    }
+
+    public void setFoto(List<Image> foto) {
+        this.foto = foto;
+    }
+
 
     public List<Corso> getCorsi() {
         return corsi;
@@ -47,14 +54,6 @@ public class Insegnante {
 
     public void setPrenotazioni(List<Prenotazione> prenotazioni) {
         this.prenotazioni = prenotazioni;
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
     }
 
     public String getCognome() {

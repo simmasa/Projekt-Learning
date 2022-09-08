@@ -2,18 +2,13 @@ package com.example.projekt.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "prenotazioni")
-
+@Table(name = "prenotazioni", uniqueConstraints = {
+		@UniqueConstraint(name = "uc_prenotazione", columnNames = {"data_prenotazione", "slot_orari", "insegnanti_id"})
+})
 public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +16,7 @@ public class Prenotazione {
     private Integer id;
 
 
+	@NotEmpty(message = "Devi inserire un email")
 	@Column(name = "email_prenonato", nullable = false)
 	private String emailPrenonato;
 

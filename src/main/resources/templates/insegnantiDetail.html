@@ -14,7 +14,7 @@
 
 		<hr />
 		<div class="text-center">
-			<img src="https://img.youtube.com/vi/videoId/0.jpg" class="rounded" alt="foto profilo insegnante">
+			<img th:src="@{|/image/${insegnanti.foto[0].id}/content|}" class="rounded" alt="foto profilo insegnante" style="max-height:500px">
 
 			<table class="table">
 				<thead>

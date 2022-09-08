@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface PrenotazioniRepository extends CrudRepository<Prenotazione, Integer> {
     List<Prenotazione> findByInsegnanti_IdOrderByDataPrenotazioneAsc(Integer id);
+
+    List<Prenotazione> findByInsegnanti_Id(Integer id);
+
+
 }
