@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -120,6 +121,22 @@ public class AdminController {
         formCorsi.setDataCreazione(Date.valueOf(LocalDate.now()));
         formCorsi.setNumVisual(0L);
         corsi.save(formCorsi);
+        return "redirect:/admin";
+
+    }
+
+//MAPPING CAPITOLI
+
+    @GetMapping("/capitoli/{id}")
+    public String addCap(@PathVariable("id") Integer idCorsi, RedirectAttributes ra, Model model) {
+        Capitolo provvisorio = new Capitolo();
+        provvisorio.setCorsi(corsi.findById(idCorsi).get());
+        model.addAttribute("AddCapitolo", provvisorio);
+        return "formCap";
+    }
+    @PostMapping("/saveCap")
+    public String saveCap(@ModelAttribute("AddCapitolo") Capitolo formCapitolo, Model model) {
+        cap.save(formCapitolo);
         return "redirect:/admin";
 
     }
