@@ -25,10 +25,8 @@ public class ImageService {
         return imgRepo.findByInsegnante(insegnante);
     }
 
-    public ImageForm newImgForm(Integer iId){
-        Insegnante inseg = insRepo.findById(iId).get();
+    public ImageForm newImgForm(){
         ImageForm imgform = new ImageForm();
-        imgform.setInsegnante(inseg);
         return imgform;
     }
 

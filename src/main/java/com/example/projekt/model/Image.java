@@ -14,8 +14,8 @@ public class Image {
     @Column(name = "content")
     private byte[] content;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "insegnante_id", nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "insegnante_id")
     private Insegnante insegnante;
 
     public Insegnante getInsegnante() {
@@ -25,6 +25,7 @@ public class Image {
     public void setInsegnante(Insegnante insegnante) {
         this.insegnante = insegnante;
     }
+
 
     public byte[] getContent() {
         return content;

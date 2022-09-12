@@ -33,10 +33,11 @@
 
 <form
         id="form-insegnanti"
-        th:object="${AddInsegnanti}"
+        enctype="multipart/form-data"
         th:action="@{/admin/save}"
         method="POST"
 >
+    <div th:object="${AddInsegnanti}">
     <input type="hidden" th:field="*{id}">
     <div class="container w-25 mt-5">
         <div class="form-group">
@@ -58,7 +59,13 @@
 
             </div>
         </div>
-
+    </div>
+        <div th:object="${imgForm}">
+            <div class="mb-3">
+                <label for="contentMultipart" class="form-label">Add a new image</label>
+                <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+            </div>
+        </div>
         <button type="submit" class="btn btn-dark mt-2"> Salva </button>
     </div>
 </form>

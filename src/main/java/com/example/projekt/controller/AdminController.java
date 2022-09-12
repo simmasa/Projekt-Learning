@@ -1,13 +1,9 @@
 package com.example.projekt.controller;
 
 
-import com.example.projekt.model.Corso;
-import com.example.projekt.model.Insegnante;
-import com.example.projekt.model.Prenotazione;
-import com.example.projekt.repository.CategorieRepository;
-import com.example.projekt.repository.CorsiRepository;
-import com.example.projekt.repository.InsegnantiRepository;
-import com.example.projekt.repository.PrenotazioniRepository;
+import com.example.projekt.model.*;
+import com.example.projekt.repository.*;
+import com.example.projekt.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +32,12 @@ public class AdminController {
 
  @Autowired
     private PrenotazioniRepository pre;
+
+ @Autowired
+ private ImageService img;
+
+ @Autowired
+ private ImageRepository imgRepo;
 
 
  @GetMapping
@@ -55,12 +59,14 @@ public class AdminController {
  @GetMapping("/add")
     public String add(Model model) {
      model.addAttribute("AddInsegnanti", new Insegnante());
+     model.addAttribute("imgForm", new ImageService().newImgForm());
      return "form";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer idInsegnante, RedirectAttributes ra, Model model) {
         model.addAttribute("AddInsegnanti", ins.findById(idInsegnante));
+        model.addAttribute("imgForm", new ImageService().newImgForm());
         return "form";
     }
 
@@ -73,12 +79,19 @@ public class AdminController {
 
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error) {
+    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error,
+                       @ModelAttribute("imgForm") ImageForm imgForm) throws IOException {
 
         if(error.hasErrors()) {
             return "form";
         }
-        ins.save(formIns);
+        imgForm.setInsegnante(formIns);
+//        List<Image> newFoto= new ArrayList<Image>();
+//        newFoto.add(img.newImage(imgForm));
+//        formIns.setFoto(newFoto);
+//        newFoto.get(0).setInsegnante(formIns);
+        imgRepo.save(img.newImage(imgForm));
+
         return "redirect:/admin";
 
     }

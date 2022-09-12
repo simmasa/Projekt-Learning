@@ -27,10 +27,9 @@ public class ImageController {
     public String InsImages(@PathVariable("iId") Integer iId, Model m) {
 
         List<Image> images = service.getImagesByInsId(iId);
-        ImageForm imageForm = service.newImgForm(iId);
+
 
         m.addAttribute("imageList", images);
-        m.addAttribute("imgForm", imageForm);
         return "imglist";
     }
 
