@@ -83,16 +83,9 @@ public class AdminController {
         if(error.hasErrors()) {
             return "form";
         }
-        if (!imgForm.getContentMultipart().isEmpty()) {
-            formIns.setImage(img.newImage(imgForm));
-        } else {
-            formIns.setImage(ins.findById(formIns.getId()).get().getImage());
-        }
-//        List<Image> newFoto= new ArrayList<Image>();
-//        newFoto.add(img.newImage(imgForm));
-//        formIns.setFoto(newFoto);
-//        newFoto.get(0).setInsegnante(formIns);
+
         ins.save(formIns);
+        img.newInsImage(imgForm, formIns.getId());
 
         return "redirect:/admin";
 

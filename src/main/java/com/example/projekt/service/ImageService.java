@@ -30,9 +30,9 @@ public class ImageService {
         return imgform;
     }
 
-    public Image newImage (ImageForm imgForm) throws IOException {
+    public Image newInsImage (ImageForm imgForm, Integer iId) throws IOException {
         Image imgSave = new Image();
-        //imgSave.setInsegnante(imgForm.getInsegnante());
+        imgSave.setInsegnante(insRepo.findById(iId).get());
         if (imgForm.getContentMultipart() != null) {
             byte[] contentSerialized = imgForm.getContentMultipart().getBytes();
             imgSave.setContent(contentSerialized);

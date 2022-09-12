@@ -14,7 +14,17 @@ public class Image {
     @Column(name = "content")
     private byte[] content;
 
+    @ManyToOne
+    @JoinColumn(name = "insegnante_id")
+    private Insegnante insegnante;
 
+    public Insegnante getInsegnante() {
+        return insegnante;
+    }
+
+    public void setInsegnante(Insegnante insegnante) {
+        this.insegnante = insegnante;
+    }
 
 
     public byte[] getContent() {

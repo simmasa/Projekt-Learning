@@ -35,12 +35,13 @@ public class ImageController {
 
     @PostMapping("/save")
     public String saveImage(@ModelAttribute("imageForm") ImageForm imageForm) {
-        try {
-            Image savedImage = service.newImage(imageForm);
-            return "redirect:/";
-        } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to save image");
-        }
+//        try {
+//            Image savedImage = service.newImage(imageForm);
+//            return "redirect:/";
+//        } catch (IOException e) {
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to save image");
+//        }
+        return "";
     }
 
     @RequestMapping(value = "/{imageId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
