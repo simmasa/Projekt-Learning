@@ -1,10 +1,7 @@
 package com.example.projekt.controller;
 
+import com.example.projekt.model.*;
 import com.example.projekt.service.ImageService;
-import com.example.projekt.model.Capitolo;
-import com.example.projekt.model.Corso;
-import com.example.projekt.model.Insegnante;
-import com.example.projekt.model.Prenotazione;
 import com.example.projekt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
