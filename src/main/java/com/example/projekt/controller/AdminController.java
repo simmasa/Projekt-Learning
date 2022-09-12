@@ -15,9 +15,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -85,12 +83,16 @@ public class AdminController {
         if(error.hasErrors()) {
             return "form";
         }
-        imgForm.setInsegnante(formIns);
+        if (!imgForm.getContentMultipart().isEmpty()) {
+            formIns.setImage(img.newImage(imgForm));
+        } else {
+            formIns.setImage(ins.findById(formIns.getId()).get().getImage());
+        }
 //        List<Image> newFoto= new ArrayList<Image>();
 //        newFoto.add(img.newImage(imgForm));
 //        formIns.setFoto(newFoto);
 //        newFoto.get(0).setInsegnante(formIns);
-        imgRepo.save(img.newImage(imgForm));
+        ins.save(formIns);
 
         return "redirect:/admin";
 

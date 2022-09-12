@@ -27,17 +27,17 @@ public class Insegnante {
     @ManyToMany(mappedBy = "insegnantis")
     private List<Corso> corsi = new ArrayList<>();
 
-    @OneToMany(mappedBy = "insegnante", orphanRemoval = true)
-    private List<Image> foto = new ArrayList<>();
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
-    public List<Image> getFoto() {
-        return foto;
+    public Image getImage() {
+        return image;
     }
 
-    public void setFoto(List<Image> foto) {
-        this.foto = foto;
+    public void setImage(Image image) {
+        this.image = image;
     }
-
 
     public List<Corso> getCorsi() {
         return corsi;

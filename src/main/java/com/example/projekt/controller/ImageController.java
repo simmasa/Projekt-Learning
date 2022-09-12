@@ -23,15 +23,15 @@ public class ImageController {
     @Autowired
     private ImageService service;
 
-    @GetMapping("/{iId}")
-    public String InsImages(@PathVariable("iId") Integer iId, Model m) {
-
-        List<Image> images = service.getImagesByInsId(iId);
-
-
-        m.addAttribute("imageList", images);
-        return "imglist";
-    }
+//    @GetMapping("/{iId}")
+//    public String InsImages(@PathVariable("iId") Integer iId, Model m) {
+//
+//        List<Image> images = service.getImagesByInsId(iId);
+//
+//
+//        m.addAttribute("imageList", images);
+//        return "imglist";
+//    }
 
     @PostMapping("/save")
     public String saveImage(@ModelAttribute("imageForm") ImageForm imageForm) {
