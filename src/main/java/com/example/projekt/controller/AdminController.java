@@ -1,13 +1,11 @@
 package com.example.projekt.controller;
 
 
+import com.example.projekt.model.Capitolo;
 import com.example.projekt.model.Corso;
 import com.example.projekt.model.Insegnante;
 import com.example.projekt.model.Prenotazione;
-import com.example.projekt.repository.CategorieRepository;
-import com.example.projekt.repository.CorsiRepository;
-import com.example.projekt.repository.InsegnantiRepository;
-import com.example.projekt.repository.PrenotazioniRepository;
+import com.example.projekt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +33,8 @@ public class AdminController {
  @Autowired
     private PrenotazioniRepository pre;
 
+ @Autowired
+    private CapitoloRepository cap;
 
  @GetMapping
     public String List(@RequestParam(value = "iId", required = false) Integer iId,Model model){
@@ -112,6 +112,22 @@ public class AdminController {
         formCorsi.setDataCreazione(Date.valueOf(LocalDate.now()));
         formCorsi.setNumVisual(0L);
         corsi.save(formCorsi);
+        return "redirect:/admin";
+
+    }
+
+//MAPPING CAPITOLI
+
+    @GetMapping("/capitoli/{id}")
+    public String addCap(@PathVariable("id") Integer idCorsi, RedirectAttributes ra, Model model) {
+        Capitolo provvisorio = new Capitolo();
+        provvisorio.setCorsi(corsi.findById(idCorsi).get());
+        model.addAttribute("AddCapitolo", provvisorio);
+        return "formCap";
+    }
+    @PostMapping("/saveCap")
+    public String saveCap(@ModelAttribute("AddCapitolo") Capitolo formCapitolo, Model model) {
+        cap.save(formCapitolo);
         return "redirect:/admin";
 
     }
