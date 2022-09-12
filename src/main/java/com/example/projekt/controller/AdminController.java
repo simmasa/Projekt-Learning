@@ -1,6 +1,6 @@
 package com.example.projekt.controller;
 
-
+import com.example.projekt.service.ImageService;
 import com.example.projekt.model.Capitolo;
 import com.example.projekt.model.Corso;
 import com.example.projekt.model.Insegnante;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +35,14 @@ public class AdminController {
     private PrenotazioniRepository pre;
 
  @Autowired
-    private CapitoloRepository cap;
+ private ImageService img;
+
+ @Autowired
+ private ImageRepository imgRepo;
+
+ @Autowired
+ private CapitoloRepository cap;
+
 
  @GetMapping
     public String List(@RequestParam(value = "iId", required = false) Integer iId,Model model){
@@ -55,12 +63,14 @@ public class AdminController {
  @GetMapping("/add")
     public String add(Model model) {
      model.addAttribute("AddInsegnanti", new Insegnante());
+     model.addAttribute("imgForm", new ImageService().newImgForm());
      return "form";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer idInsegnante, RedirectAttributes ra, Model model) {
         model.addAttribute("AddInsegnanti", ins.findById(idInsegnante));
+        model.addAttribute("imgForm", new ImageService().newImgForm());
         return "form";
     }
 
@@ -73,12 +83,16 @@ public class AdminController {
 
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error) {
+    public String save(@Valid @ModelAttribute("AddInsegnanti") Insegnante formIns, BindingResult error,
+                       @ModelAttribute("imgForm") ImageForm imgForm) throws IOException {
 
         if(error.hasErrors()) {
             return "form";
         }
+
         ins.save(formIns);
+        img.newInsImage(imgForm, formIns.getId());
+
         return "redirect:/admin";
 
     }
@@ -120,13 +134,14 @@ public class AdminController {
 
     @GetMapping("/capitoli/{id}")
     public String addCap(@PathVariable("id") Integer idCorsi, RedirectAttributes ra, Model model) {
-        Capitolo provvisorio = new Capitolo();
-        provvisorio.setCorsi(corsi.findById(idCorsi).get());
-        model.addAttribute("AddCapitolo", provvisorio);
+        model.addAttribute("corso", corsi.findById(idCorsi).get());
+        model.addAttribute("AddCapitolo", new Capitolo());
         return "formCap";
     }
     @PostMapping("/saveCap")
     public String saveCap(@ModelAttribute("AddCapitolo") Capitolo formCapitolo, Model model) {
+        formCapitolo.setNumeroCapitolo(corsi.findById(formCapitolo.getCorsi().getId()).get().getCapitoli().size()+1);
+
         cap.save(formCapitolo);
         return "redirect:/admin";
 

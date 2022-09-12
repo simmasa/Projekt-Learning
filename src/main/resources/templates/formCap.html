@@ -14,8 +14,8 @@
         th:action="@{/admin/saveCap}"
         method="POST"
 >
-    <input type="hidden" th:field="*{id}">
-    <div class="container w-25 mt-5">
+    <input type="hidden" name="corsi" th:value="${corso.id}">
+    <div class="container w-25 mt-5" >
         <div class="form-group">
 
             <label for="nome">Nome Capitolo</label>
@@ -43,17 +43,6 @@
             <div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
                 <div th:each="err : ${#fields.errors('url')}" th:text="${err}"></div>
             </div>
-
-
-      <div class="form-group">
-
-        <label for="numcap">Numero Capitolo</label>
-        <input type="number" class="form-control" id="numcap" aria-describedby="emailHelp" placeholder="Seleziona n. Capitolo" th:field="*{numeroCapitolo}" th:errorClass="is-invalid">
-          <div th:if="${#fields.hasErrors('numeroCapitolo')}" class="invalid-feedback">
-            <div th:each="err : ${#fields.errors('numeroCapitolo')}" th:text="${err}"></div>
-          </div>
-
-    </div>
 
 
         </div>

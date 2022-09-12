@@ -116,13 +116,10 @@
                 <td class="ms-5 text-center">
                     <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/edit/${ins.getId}|}"><i class="bi bi-pen text-white"></i></a>
                     <a class="btn btn-dark" title="Delete" th:href="@{|/admin/del/${ins.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
-                    <a class="btn btn-success"  title="Add Photo" th:href="@{|/image/${ins.getId}|}"><i class="bi bi-images"></i></a>
                 </td>
             </tr>
             </tbody>
         </table>
-
-
     </div>
     <div class="ex1">
         <h2 class="text-center">Lista Corsi <a class="btn btn-dark"  title="Edit" th:href="@{/admin/addCorsi}" role="button"><i class="bi bi-plus-lg"></i></a></h2>
@@ -145,7 +142,7 @@
                 <td class="ms-5 text-center">
                     <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/editCorsi/${corsi.getId}|}"><i class="bi bi-pen text-white"></i></a>
                     <a class="btn btn-dark" title="Delete" th:href="@{|/admin/delCorsi/${corsi.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
-                    <a class="btn btn-success"  title="Edit" th:href="@{|/admin/capitoli/${corsi.getId}|}"><i class="bi bi-journal-plus"></i></a>
+                    <a class="btn btn-dark" title="Aggiungi Capitolo" th:href="@{|/admin/capitoli/${corsi.id}|}"><i class="bi bi-trash text-white"></i></a>
                 </td>
             </tr>
             </tbody>
