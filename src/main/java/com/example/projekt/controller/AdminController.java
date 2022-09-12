@@ -38,6 +38,9 @@ public class AdminController {
  @Autowired
  private ImageRepository imgRepo;
 
+ @Autowired
+ private CapitoloRepository cap;
+
 
  @GetMapping
     public String List(@RequestParam(value = "iId", required = false) Integer iId,Model model){
@@ -129,13 +132,14 @@ public class AdminController {
 
     @GetMapping("/capitoli/{id}")
     public String addCap(@PathVariable("id") Integer idCorsi, RedirectAttributes ra, Model model) {
-        Capitolo provvisorio = new Capitolo();
-        provvisorio.setCorsi(corsi.findById(idCorsi).get());
-        model.addAttribute("AddCapitolo", provvisorio);
+        model.addAttribute("corso", corsi.findById(idCorsi).get());
+        model.addAttribute("AddCapitolo", new Capitolo());
         return "formCap";
     }
     @PostMapping("/saveCap")
     public String saveCap(@ModelAttribute("AddCapitolo") Capitolo formCapitolo, Model model) {
+        formCapitolo.setNumeroCapitolo(corsi.findById(formCapitolo.getCorsi().getId()).get().getCapitoli().size()+1);
+
         cap.save(formCapitolo);
         return "redirect:/admin";
 
