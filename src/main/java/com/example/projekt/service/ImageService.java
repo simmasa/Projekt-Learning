@@ -20,21 +20,19 @@ public class ImageService {
     @Autowired
     private InsegnantiRepository insRepo;
 
-    public List<Image> getImagesByInsId(Integer insId) {
-        Insegnante insegnante = insRepo.findById(insId).get();
-        return imgRepo.findByInsegnante(insegnante);
-    }
+//    public List<Image> getImagesByInsId(Integer insId) {
+//        Insegnante insegnante = insRepo.findById(insId).get();
+//        return imgRepo.findByInsegnante(insegnante);
+//    }
 
-    public ImageForm newImgForm(Integer iId){
-        Insegnante inseg = insRepo.findById(iId).get();
+    public ImageForm newImgForm(){
         ImageForm imgform = new ImageForm();
-        imgform.setInsegnante(inseg);
         return imgform;
     }
 
-    public Image newImage (ImageForm imgForm) throws IOException {
+    public Image newInsImage (ImageForm imgForm, Integer iId) throws IOException {
         Image imgSave = new Image();
-        imgSave.setInsegnante(imgForm.getInsegnante());
+        imgSave.setInsegnante(insRepo.findById(iId).get());
         if (imgForm.getContentMultipart() != null) {
             byte[] contentSerialized = imgForm.getContentMultipart().getBytes();
             imgSave.setContent(contentSerialized);

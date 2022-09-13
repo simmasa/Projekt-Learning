@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:insert="fragments :: metatags(name='Corsi')">
+<head th:insert="fragments :: metatags(name='Ricerca Corsi')">
 </head>
 <body>
 <header th:replace="fragments :: header"></header>
@@ -9,12 +9,6 @@
     <div>
     <h2 class="text-center">Ricerca corsi</h2>
 
-    <!--form class="form-control border-0" th:action="@{/corsi/search}">
-      <div class="input-group mb-3">
-        <input th:name="search" type="text" class="form-control" placeholder="Inserisci quello che vuoi cercare" aria-label="Searchbar" aria-describedby="searchbar">
-        <button class="btn btn-outline-secondary" type="submit" id="searchbtn">Cerca</button>
-      </div>
-    </form -->
     </div>
     <div class="">
       <h4 class="mb-3">Ricerca avanzata</h4>
@@ -48,9 +42,9 @@
       </div>
     </form>
 
-    <div class="search">
+    <div class="search" th:if="${!list.empty and list!=null}">
       <div class="section-title my-3">
-        <h2>I risultati della tua ricerca</h2>
+        <h3>I risultati della tua ricerca</h3>
       </div>
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
@@ -63,6 +57,11 @@
             </th:block>
           </div>
         </div>
+      </div>
+    </div>
+    <div th:unless="${!list.empty}">
+      <div class="text-center my-2">
+        <h3>Non abbiamo trovato risultati per la tua ricerca (o non hai ancora cercato nulla!)</h3>
       </div>
     </div>
   </div>

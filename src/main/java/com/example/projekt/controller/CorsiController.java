@@ -88,6 +88,7 @@ public class CorsiController {
 //        return -1;
 //     }
      public List<Corso> simSearchResult(String request){
+
         List<Corso> name = corsiRepo.findByTitoloContainsIgnoreCaseOrderByNumVisualDesc(request);
         List<Corso> prof = corsiRepo.findByInsegnantis_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
         List<Corso> cat = corsiRepo.findByCategorie_NomeLikeIgnoreCaseOrderByNumVisualAsc(request);
@@ -105,8 +106,8 @@ public class CorsiController {
          return result;
      }
     public List<Corso> advSearchResult(String title,String doc,Integer lvl,String catReq){
-        List<Corso> inseg =new ArrayList<Corso>();
 
+        List<Corso> inseg =new ArrayList<Corso>();
         if (doc != null) {
             String[] nomeCog = doc.split(" ");
             for (String i:
@@ -135,7 +136,7 @@ public class CorsiController {
         List<Corso> diff = corsiRepo.findByLivelloDifficolta(lvl);
 
 
-        if (title!= null && title.isBlank()) {
+        if (title != null && title.isBlank()) {
 
             assert doc != null;
             if ((!doc.isEmpty() || !catReq.isEmpty() || lvl != null)){

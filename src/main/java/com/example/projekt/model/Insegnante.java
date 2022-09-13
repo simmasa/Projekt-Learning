@@ -3,7 +3,9 @@ package com.example.projekt.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "insegnanti")
@@ -28,16 +30,15 @@ public class Insegnante {
     private List<Corso> corsi = new ArrayList<>();
 
     @OneToMany(mappedBy = "insegnante", orphanRemoval = true)
-    private List<Image> foto = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
-    public List<Image> getFoto() {
-        return foto;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setFoto(List<Image> foto) {
-        this.foto = foto;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
-
 
     public List<Corso> getCorsi() {
         return corsi;
