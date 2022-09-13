@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="fragments :: metatags(name=${corso.titolo})">
 </head>
 <body>
@@ -12,8 +12,8 @@
                   <div class="col-10 col-sm-8 col-lg-6">
                     <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/hqdefault.jpg'}" alt="thumbnail Youtube" class="img-fluid">
                     <div class="d-grid gap-2 d-md-flex justify-content-center my-3">
-                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Compra</button>
-                      <button type="button" class="btn btn-outline-secondary btn-lg px-4">Wishlist</button>
+                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" sec:authorize="hasAuthority('USER')">Compra</button>
+                      <button type="button" class="btn btn-outline-secondary btn-lg px-4" sec:authorize="hasAuthority('USER')">Wishlist</button>
                     </div>
                   </div>
                   <div class="col-lg-6">
@@ -43,7 +43,8 @@
                           <th scope="row" th:text="${cap.numeroCapitolo}"></th>
                           <td th:text="${cap.titolo}"></td>
                           <td th:text="${cap.descrizione}"></td>
-                          <td class="text-end"><a class="btn btn-warning" th:href="@{|/corsi/${corso.id}/${cap.numeroCapitolo}|}">Avvia</a></td>
+                          <td class="text-end"><a class="btn btn-warning" sec:authorize="hasAuthority('USER')"
+                                                  th:href="@{|/corsi/${corso.id}/${cap.numeroCapitolo}|}">Avvia</a></td>
                       </tr>
                   </tbody>
                 </table>
