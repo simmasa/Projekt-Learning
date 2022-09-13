@@ -1,13 +1,17 @@
 package com.example.projekt.repository;
 
 import com.example.projekt.model.Image;
-import com.example.projekt.model.Insegnante;
+
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ImageRepository extends CrudRepository<Image, Integer> {
-    //List<Image> findByInsegnante(Insegnante insegnante);
+    Optional<Image> findFirstByIdOrderByIdDesc(Integer id);
+
+    List<Image> findByIdOrderByIdDesc(Integer id);
+
 
 
 }
