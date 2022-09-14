@@ -17,7 +17,7 @@
 				<div class="col" th:each="i : ${insegnanti}">
 					<a th:href="@{|insegnanti/detail/${i.id}|}"class="link-dark" style="text-decoration: none">
 						<div class="card shadow-sm">
-							<img th:src="@{|/image/${i.images[0].id}/content|}" alt="pro pic insegnante">
+							<img th:src="@{|/image/${i.images[i.images.size()-1].id}/content|}" alt="pro pic insegnante">
 
 							<div class="card-body">
 								<p class="card-text">Nome: <span th:text="${i.nome}"></span></p>
