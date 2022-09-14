@@ -6,27 +6,19 @@
 </head>
 
 <body>
-	<header> <th:block th:replace="fragments::header">
+	<header>
+		<th:block th:replace="fragments::header">
 		</th:block>
 	</header>
 	<div class="container">
-		<h1 class="text-center text-secondary ">Profilo Insegnante</h1>
+		<h1 class="text-center text-dark ">Profilo Insegnante</h1>
 
-		<hr />
+
 		<div class="text-center">
+			<br>
 			<img src="https://img.youtube.com/vi/videoId/0.jpg" class="rounded" alt="foto profilo insegnante">
 
 			<table class="table">
-				<thead>
-					<tr>
-						<th class="text-primary fs-2">Nome</th>
-						<th class="text-primary fs-2">Cognome</th>
-
-
-
-
-					</tr>
-				</thead>
 				<tbody>
 
 					<td th:text="${insegnanti.nome}"></td>
@@ -37,16 +29,16 @@
 			</table>
 		</div>
 		<div class="container">
-			<h2 class="text-center text-secondary mt-5" th:text="'Corsi:'"></h2>
+			<h2 class="text-center text-dark mt-5" th:text="'Corsi:'"></h2>
 
 			<table class="table">
 				<thead>
 					<tr>
-						<th class="text-primary fs-2">Titolo</th>
-						<th class="text-primary fs-2">Descrizione</th>
-						<th class="text-primary fs-2">Livello Difficoltà</th>
-						<th class="text-primary fs-2">Durata</th>
-						<th class="text-primary fs-2">Data Creazione</th>
+						<th class="text-dark fs-7">Titolo</th>
+						<th class="text-dark fs-7">Descrizione</th>
+						<th class="text-dark fs-7">Livello Difficoltà</th>
+						<th class="text-dark fs-7">Durata</th>
+						<th class="text-dark fs-7">Data Creazione</th>
 
 					</tr>
 				</thead>
@@ -75,7 +67,7 @@
 			</div>
 
 		</form>
-</div>
+	</div>
 </body>
 
 </html>

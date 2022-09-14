@@ -6,7 +6,8 @@
 </head>
 
 <body>
-	<header> <th:block th:replace="fragments::header">
+	<header>
+		<th:block th:replace="fragments::header">
 		</th:block>
 	</header>
 	<h1 class="text-center">Insegnanti</h1>
@@ -14,7 +15,7 @@
 		<div class="container-flex">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 justify-content-center">
 				<div class="col" th:each="i : ${insegnanti}">
-					<a th:href="@{|insegnanti/detail/${i.id}|}">
+					<a th:href="@{|insegnanti/detail/${i.id}|}"class="link-dark" style="text-decoration: none">
 						<div class="card shadow-sm">
 							<img th:src="@{|/image/${i.images[0].id}/content|}" alt="pro pic insegnante">
 
@@ -25,9 +26,11 @@
 							</div>
 						</div>
 					</a>
+
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	</div>
 </body>
