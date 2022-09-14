@@ -1,5 +1,7 @@
 package com.example.projekt.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -33,20 +35,24 @@ public class Corso {
         this.dataCreazione = dataCreazione;
     }
 
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "categorie_id", nullable = false)
     private Categoria categorie;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "corsi", orphanRemoval = true)
     private List<Capitolo> capitoli = new ArrayList<>();
 
 
+    @JsonBackReference
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "corsi_tags",
             joinColumns = @JoinColumn(name = "corsi_id"),
             inverseJoinColumns = @JoinColumn(name = "tags_id"))
     private List<Tag> tags = new ArrayList<>();
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "insegnanti_corsis",
             joinColumns = @JoinColumn(name = "corsis_id", referencedColumnName = "id"),
