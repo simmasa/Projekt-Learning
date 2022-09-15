@@ -12,6 +12,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Tomorrow&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="/likeBtn.js"></script>
         <style>
       .bi {
@@ -122,7 +123,10 @@
 
     <th:block th:fragment="cardB (corsoId,corsoURL,corsoT,corsoN,corsoLD,corsoD,corsoTa)">
         <div class="card shadow-sm position-relative">
-            <div th:id="'card-'+${corsoId}" th:data-corso-id="${corsoId}" class="position-absolute top-0 end-0 p-2 bg-dark text-white-50 bg-opacity-50 rounded-start"><i class="bi bi-heart-fill"></i></div>
+            <div th:id="'card-'+${corsoId}" th:attr="data-corsoId=${corsoId}"
+                 class="position-absolute top-0 end-0 p-2 bg-dark text-white-50 bg-opacity-50 rounded-start likebtn">
+                <i class="bi bi-heart-fill"></i>
+            </div>
             <a th:href="@{|/corsi/${corsoId}|}" class="linkN">
 
                 <img class="w-100" th:src="@{'https://img.youtube.com/vi/'+ ${corsoURL} +'/0.jpg'}" alt="thumbnail Youtube">
