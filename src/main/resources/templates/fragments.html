@@ -135,7 +135,7 @@
 
     <th:block th:fragment="cardB (corsoId,corsoURL,corsoT,corsoN,corsoLD,corsoD,corsoTa)">
         <div class="card shadow position-relative">
-            <div th:id="'card-'+${corsoId}" th:attr="data-corsoId=${corsoId}"
+            <div sec:authorize="isAuthenticated()" th:id="'card-'+${corsoId}" th:attr="data-corsoId=${corsoId}"
                  class="position-absolute top-0 end-0 p-2 bg-dark text-white-50 bg-opacity-50 rounded-start likebtn">
                 <i class="bi bi-heart-fill"></i>
             </div>
