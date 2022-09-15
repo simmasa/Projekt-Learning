@@ -15,67 +15,66 @@
 		<th:block th:if="${successMessage != null && successMessage != ''}">
 			<div class="alert alers-success" th:text="${successMessage}"></div>
 		</th:block>
-	<div class="container">
-		<h1 class="text-center text-dark ">Profilo Insegnante</h1>
-
-
-		<div class="text-center">
-			<br>
-
-
-			<table class="table">
-				<tbody>
-					<img class="img-fluid" width="200px" height="200px" th:src="
-						@{|/image/${insegnanti.images[insegnanti.images.size()-1].id}/content|}"
-						alt="pro pic insegnante">
-					<div style="font-size:30px;" th:text="${insegnanti.nome}"></div>
-					<div style="font-size:30px;" th:text="${insegnanti.cognome}"></div>
-
-					</tr>
-				</tbody>
-			</table>
-		</div>
 		<div class="container">
-			<h2 class="text-center text-dark mt-5" th:text="'Corsi:'"></h2>
-
-			<table class="table">
-				<thead>
-					<tr>
-						<th class="text-dark fs-7">Titolo</th>
-						<th class="text-dark fs-7">Descrizione</th>
-						<th class="text-dark fs-7">Livello Difficoltà</th>
-						<th class="text-dark fs-7">Durata</th>
-						<th class="text-dark fs-7">Data Creazione</th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="i : ${insegnanti.corsi}">
-						<td th:text="${i.titolo}"></td>
-						<td th:text="${i.descrizione}"></td>
-						<td th:text="${i.livelloDifficolta}"></td>
-						<td th:text="${i.durata}"></td>
-						<td th:text="${i.dataCreazione}"></td>
-
-					</tr>
-				</tbody>
-
-			</table>
-		</div>
-
-		<form>
-			<div class="row">
+			<h1 class="text-center text-dark ">Profilo Insegnante</h1>
 
 
-				<div class="col">
-					<a class="btn btn-dark " th:href="@{|/insegnanti/detail/${insegnanti.id}/prenota|}">Prenota una
-						lezione privata</a>
-				</div>
+			<div class="text-center">
+				<br>
+
+
+				<table class="table">
+					<tbody>
+						<img class="img-fluid"  style="height: 150px"  th:src="
+						@{|/image/${insegnanti.images[insegnanti.images.size()-1].id}/content|}"alt="pro pic insegnante">
+						<div style="font-size:30px;" th:text="${insegnanti.nome}"></div>
+						<div style="font-size:30px;" th:text="${insegnanti.cognome}"></div>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="container">
+				<h2 class="text-center text-dark mt-5" th:text="'Corsi:'"></h2>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="text-dark fs-7">Titolo</th>
+							<th class="text-dark fs-7">Descrizione</th>
+							<th class="text-dark fs-7">Livello Difficoltà</th>
+							<th class="text-dark fs-7">Durata</th>
+							<th class="text-dark fs-7">Data Creazione</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="i : ${insegnanti.corsi}">
+							<td th:text="${i.titolo}"></td>
+							<td th:text="${i.descrizione}"></td>
+							<td th:text="${i.livelloDifficolta}"></td>
+							<td th:text="${i.durata}"></td>
+							<td th:text="${i.dataCreazione}"></td>
+
+						</tr>
+					</tbody>
+
+				</table>
 			</div>
 
-		</form>
+			<form>
+				<div class="row">
 
-	</div>
+
+					<div class="col">
+						<a class="btn btn-dark " th:href="@{|/insegnanti/detail/${insegnanti.id}/prenota|}">Prenota una
+							lezione privata</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
 
 	</div>
 	<footer th:replace="fragments :: footer"></footer>
