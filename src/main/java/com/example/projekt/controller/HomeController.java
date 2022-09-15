@@ -28,6 +28,7 @@ public class HomeController {
 		model.addAttribute("corsi", corsiRepo.findAll());
 		model.addAttribute("corsiTop", corsiRepo.findByOrderByNumVisualDesc());
 		model.addAttribute("capitolo", capitoloRepo.findAll());
+		model.addAttribute("tag", corsiRepo.findByTags_IdLike(6));
 		return "home";
 	}
 

@@ -16,11 +16,11 @@
 
 		<div class="text-center">
 			<br>
-			<img src="https://img.youtube.com/vi/videoId/0.jpg" class="rounded" alt="foto profilo insegnante">
+			 
 
 			<table class="table">
 				<tbody>
-
+<img th:src="@{|/image/${insegnanti.images[insegnanti.images.size()-1].id}/content|}" alt="pro pic insegnante">
 					<td th:text="${insegnanti.nome}"></td>
 					<td th:text="${insegnanti.cognome}"></td>
 
