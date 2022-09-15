@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div th:replace="fragment :: risorse"></div>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Sito Università</title>
+  </head>
+  <body>
+  <th:block th:replace="fragments :: metatags(name = 'projekt-learning')"></th:block>
+     <div class = "text-center mt-5">
+         <img src="https://ubiq.co/tech-blog/wp-content/uploads/2020/08/apache-500-internal-server-error.png" alt="DOH!">
+     <div>
+     <a href="/home" class="btn btn-warning text-white">Torna alla home</a>
+     </div>
+     </div>
+
+     <footer th:replace = "fragments :: footer"></footer>
+  </body>
+</html>
