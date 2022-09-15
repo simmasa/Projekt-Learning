@@ -43,6 +43,18 @@
       .card {
       min-height: 100%;
       }
+      footer {
+         	text-align: center;
+         	margin-top: 30px;
+            margin-bottom: 0px;
+            width: 100%;
+       }
+       .prova {
+            min-height: 70vh;
+            min-height: -webkit-calc(100vh - 186px);
+            min-height: -moz-calc(100vh - 186px);
+            min-height: calc(100vh - 186px);
+       }
     </style>
     </th:block>
 </head>
@@ -53,8 +65,8 @@
 <main>
 
     <header th:fragment="header">
-        <div class="px-3 py-2 text-bg-dark">
-            <div class="container mx-auto">
+        <div class="px-3 py-2 bg-dark">
+            <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a th:href="@{/}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 
@@ -121,7 +133,7 @@
 
     <th:block th:fragment="cardB (corsoId,corsoURL,corsoT,corsoN,corsoLD,corsoD,corsoTa)">
         <a th:href="@{|/corsi/${corsoId}|}" class="linkN">
-            <div class="card shadow-sm">
+            <div class="card shadow">
                 <img th:src="@{'https://img.youtube.com/vi/'+ ${corsoURL} +'/0.jpg'}" alt="thumbnail Youtube">
                 <div class="card-body">
                     <div class="tiolo border-bottom">
@@ -129,7 +141,7 @@
                     </div>
                     <p class="card-text">Categoria: <span th:text="${corsoN}"></span></p>
                     <p class="card-text">Livello di Difficoltà: <span th:text="${corsoLD}"></span></p>
-                    <p class="card-text">Durata: <span th:text="${corsoD}"></span></p>
+                    <p class="card-text">Durata: <span th:text="${corsoD} + ' ore'"></span></p>
                     <ul style="list-style: none; padding-left: 0">
                         <li th:each="t : ${corsoTa}" th:text="${t.nome}" class="badge rounded-pill text-bg-primary lh-lg"
                             style="display: inline">
@@ -141,7 +153,33 @@
         </a>
     </th:block>
 
+
+
 </main>
+
+
+        <footer th:fragment="footer" class="d-flex bg-dark flex-wrap justify-content-between align-items-center border-top py-2 pe-2">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="ms-4 mb-3 mb-md-0 text-muted">© 2022 Team 3; Jana60</span>
+            </div>
+            <div class="text-muted d-flex py-1">
+                <div class="mx-2">
+                    <div>Simone Masala</div>
+                    <div>Matteo Covetti</div>
+                </div>
+                <div class="mx-2">
+                    <div>RubenJoshua Fiore</div>
+                    <div>Emanuele Esposito</div>
+                </div>
+
+
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-3">
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitter"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook"></i></a></li>
+            </ul>
+        </footer>
 
 
 
