@@ -59,6 +59,8 @@ public class Corso {
             inverseJoinColumns = @JoinColumn(name = "insegnanti_id", referencedColumnName = "id"))
     private List <Insegnante> insegnantis = new ArrayList<>();
 
+
+
     public List<Insegnante> getInsegnantis() {
         return insegnantis;
     }
@@ -69,6 +71,17 @@ public class Corso {
 
     @Column(name = "num_visual", nullable = false)
     private Long numVisual;
+
+    @Column(name = "likes", nullable = false)
+    private Long likes;
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
 
     public Long getNumVisual() {
         return numVisual;

@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+
 	<th:block th:replace="fragments :: metatags(name = 'projekt-learning')"></th:block>
+	<style>
+      footer {
+         	text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+       }
+   	</style>
 </head>
 <body>
 	<header th:replace="fragments :: header"></header>
@@ -10,8 +19,6 @@
 	<div class=" text-center bg-image rounded-3 mb-3">
 		<img th:src="@{images/imgback.jpg}" class="img-fluid">
 	</div>
-	
-	<!--<img th:src="@{images/prova1.jpg}">-->
 	
 	<div class="container mb-3">
 	<h2>Corsi più caldi:</h2>
@@ -41,10 +48,15 @@
        </div>
     </div>
 	</div>
+
 		
 	</main>
-	
+
+	<footer th:replace = "fragments :: footer"></footer>
+
+
 	<script src="./Headers · Bootstrap v5.2_files/bootstrap.bundle.min.js.download" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 	
 </body>
+
 </html>

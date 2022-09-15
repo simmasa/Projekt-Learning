@@ -5,7 +5,7 @@
 <body>
 <header th:replace="fragments :: header"></header>
 <main>
-  <div class="container my-3">
+  <div class="container my-3 prova">
     <div>
     <h2 class="text-center">Ricerca corsi</h2>
 
@@ -16,22 +16,22 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="titolo" class="form-label">Titolo</label>
-              <input type="text" class="form-control" id="titolo" placeholder="Java" th:name="title">
+              <input type="text" class="form-control" id="titolo" placeholder="Java" th:name="title" th:value="${param.title}">
             </div>
 
             <div class="col-sm-6">
               <label for="doc" class="form-label">Insegnante</label>
-              <input type="text" class="form-control" id="doc" placeholder="Giancarlo Lauretti" th:name="doc">
+              <input type="text" class="form-control" id="doc" placeholder="Giancarlo Lauretti" th:name="doc" th:value="${param.doc}">
             </div>
 
             <div class="col-6">
               <label for="LD" class="form-label">Livello di difficoltà</label>
-                <input type="text" class="form-control" id="LD" placeholder="1-5" th:name="LD">
+                <input type="text" class="form-control" id="LD" placeholder="1-5" th:name="LD" th:value="${param.LD}">
             </div>
 
             <div class="col-6">
               <label for="cat" class="form-label">Categoria</label>
-              <input type="text" class="form-control" id="cat" placeholder="Informatica,Cucina...." th:name="Cat">
+              <input type="text" class="form-control" id="cat" placeholder="Informatica,Cucina...." th:name="Cat" th:value="${param.Cat}">
             </div>
 
           <hr class="my-4">
@@ -66,5 +66,6 @@
     </div>
   </div>
 </main>
+<footer th:replace = "fragments :: footer"></footer>
 </body>
 </html>

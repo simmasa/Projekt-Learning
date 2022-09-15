@@ -9,20 +9,49 @@
             <!-- hero -->
             <div class="container px-4 pt-4">
                 <div class="row flex-lg-row-reverse g-5 align-items-center">
-                  <div class="col-10 col-sm-8 col-lg-6">
-                    <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/hqdefault.jpg'}" alt="thumbnail Youtube" class="img-fluid">
-                    <div class="d-grid gap-2 d-md-flex justify-content-center my-3">
+                  <div class="col-10 col-sm-8 col-lg-6 text-center">
+                    <img th:src="@{'https://img.youtube.com/vi/'+ ${corso.capitoli[0].url} +'/hqdefault.jpg'}" alt="thumbnail Youtube" class="img-fluid rounded">
+                      <hr>
+                    <div class="gap-2 d-flex my-3 justify-content-between text-center">
+
+                            <span class="col border rounded" th:text="'Livello Difficoltà: '+${corso.livelloDifficolta}"></span>
+                            <span class="col border rounded" >
+                                <i class="bi bi-clock"></i><span th:text="${corso.durata}+' ore'"></span>
+                            </span>
+                            <!-- span class="col text-muted border rounded">
+                                <i class="bi bi-eye"></i><span th:text="' '+${corso.numVisual}"></span>
+                              </span>
+
                       <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" sec:authorize="hasAuthority('USER')">Compra</button>
-                      <button type="button" class="btn btn-outline-secondary btn-lg px-4" sec:authorize="hasAuthority('USER')">Wishlist</button>
+                      <button type="button" class="btn btn-outline-secondary btn-lg px-4" sec:authorize="hasAuthority('USER')">Wishlist</button -->
                     </div>
+                      <div class="gap-2 d-flex my-3 justify-content-between text-center">
+                          <span class="col text-muted border rounded">
+                                <i class="bi bi-eye"></i><span th:text="' '+${corso.numVisual}"></span>
+                              </span>
+                          <span class="col text-muted border rounded">
+                                <i class="bi bi-heart-fill"></i><span th:text="' '+${corso.likes}"></span>
+                              </span>
+                      </div>
                   </div>
                   <div class="col-lg-6">
                     <h1 class="display-5 fw-bold lh-1 mb-3" th:text="${corso.titolo}"></h1>
                     <p class="lead" th:text="${corso.descrizione}"></p>
-                    <p>Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
+                      <hr>
+                      <div class="container">
+
+
+                          <div class="d-flex mt-1">
+                              <div th:each="i : ${corso.insegnantis}" class="text-center">
+                                <img th:src="@{|/image/${i.images[i.images.size()-1].id}/content|}" style="height: 100px" class="rounded-circle" alt="propic">
+                                <p th:text="${i.nome} +' '+ ${i.cognome}"></p>
+                              </div>
+                          </div>
+                      </div>
+                    <!-- p>Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
                     <p >Durata: <span th:text="${corso.durata}"></span> ore</p>
                     <p><span th:text="${corso.insegnantis.size} > 1 ? 'Docenti: ' : 'Docente: '"></span><span th:each="i : ${corso.insegnantis}" th:text="${i.nome}+' '+${i.cognome}"></span></p>
-                    <p >Numero visualizzazioni: <span th:text="${corso.numVisual}"></span></p>
+                    <p >Numero visualizzazioni: <span th:text="${corso.numVisual}"></span></p -->
                   </div>
                 </div>
             </div>
@@ -51,5 +80,6 @@
             </div>
         </div>
     </main>
+    <footer th:replace = "fragments :: footer"></footer>
 </body>
 </html>
