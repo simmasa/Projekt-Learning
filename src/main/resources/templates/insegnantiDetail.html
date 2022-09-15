@@ -10,6 +10,11 @@
 		<th:block th:replace="fragments::header">
 		</th:block>
 	</header>
+	<div class="container-flex ">
+		<!--messaggi di alert-->
+		<th:block th:if="${successMessage != null && successMessage != ''}">
+			<div class="alert alers-success" th:text="${successMessage}"></div>
+		</th:block>
 	<div class="container">
 		<h1 class="text-center text-dark ">Profilo Insegnante</h1>
 

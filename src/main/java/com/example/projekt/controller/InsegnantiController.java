@@ -87,10 +87,17 @@ public class InsegnantiController {
 			} catch (Exception e) {
 				m.addAttribute("errore", "C'è stato un errore durante il salvataggio della prenotazione");
 			}
-			rs.addFlashAttribute("PrenotazioneEffettuata", "La prenotazione con l'insegnante:"
-					+ formPrenotazioni.getInsegnanti().getCognome() + "" + "" + " è stata correttamente salvata");
-			return "redirect:/insegnanti/detail/" + formPrenotazioni.getInsegnanti().getId();
+			Optional<Prenotazione> result = repoPrenotazioni.findById(iId);
+			if (result.isPresent()) {
+				rs.addFlashAttribute("successMessage", " La Prenotazione della lezione privata con l'insegnante" + " "
+						+ formPrenotazioni.getInsegnanti().getCognome() + "" + "" + " è stata correttamente salvata!");
 
+				return "redirect:/insegnanti/detail/" + formPrenotazioni.getInsegnanti().getId();
+			}
+
+			else {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La prenotazione non è stata salvata");
+			}
 		}
 
 	}
