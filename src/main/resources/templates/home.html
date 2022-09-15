@@ -16,24 +16,38 @@
 	<header th:replace="fragments :: header"></header>
 	<div class="b-example-divider"></div>
 	<main>
-	<div class="mb-5 p-5 bg-primary text-white text-center">
-  		<h1>PROJEKT LEARNING</h1>
-  		<p>Impara con noi!</p>
+	<div class=" text-center bg-image rounded-3 mb-3">
+		<img th:src="@{images/imgback.jpg}" class="img-fluid">
 	</div>
-	<h1 class="text-center">Corsi più caldi</h1>
-	<div class="container">
-	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 justify-content-center">
-    	<div  th:each="corso : ${corsiTop}">
-			<th:block th:insert="fragments :: cardB(${corso.id},
-                            ${corso.capitoli[0].url},
-                            ${corso.titolo}, ${corso.categorie.nome},
-                            ${corso.livelloDifficolta},${corso.durata},
-                            ${corso.tags})">
-			</th:block>
+	
+	<div class="container mb-3">
+	<h2>Corsi più caldi:</h2>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+    	<div class="col" th:each="corso : ${corsiTop}">
+    	<th:block th:insert="fragments :: cardB(${corso.id},
+                        ${corso.capitoli[0].url},
+                        ${corso.titolo}, ${corso.categorie.nome},
+                        ${corso.livelloDifficolta},${corso.durata},
+                        ${corso.tags})">
+                        </th:block>
+       </div>
+    </div>
+    <hr>
+	</div>
+	
+	<div class="container mt-3 mb-3">
+	<h2 >Corsi in sconto:</h2>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+    	<div class="col" th:each="corso : ${tag}">
+    	<th:block th:insert="fragments :: cardB(${corso.id},
+                        ${corso.capitoli[0].url},
+                        ${corso.titolo}, ${corso.categorie.nome},
+                        ${corso.livelloDifficolta},${corso.durata},
+                        ${corso.tags})">
+                        </th:block>
        </div>
     </div>
 	</div>
-
 
 		
 	</main>
