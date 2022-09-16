@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+
 	<th:block th:replace="fragments :: metatags(name = 'projekt-learning')"></th:block>
+
 </head>
 <body>
 	<header th:replace="fragments :: header"></header>
 	<div class="b-example-divider"></div>
 	<main>
-	<div class="mb-5 p-5 bg-primary text-white text-center">
-  		<h1>PROJEKT LEARNING</h1>
-  		<p>Impara con noi!</p>
+	<div class=" text-center bg-image rounded-3 mb-3">
+		<img th:src="@{images/imgback.jpg}" class="img-fluid">
 	</div>
-	<h1 class="text-center">Corsi più caldi</h1>
-	<div class="container">
+	
+	<div class="container mb-3">
+	<h2>Corsi più caldi:</h2>
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
     	<div class="col" th:each="corso : ${corsiTop}">
-    	<a th:href="@{|/corsi/${corso.id}|}" class="link-dark" style="text-decoration: none">
-        	<div class="card shadow-sm">
-            	<!-- <img src="https://img.youtube.com/vi/videoId/0.jpg" alt="thumbnail Youtube"> -->
-				<img th:src="@{${'https://img.youtube.com/vi/' + corso.capitoli[0].url +'/0.jpg'}}" alt="thumbnail Youtube">
-				
-
-            	<div class="card-body">
-                	<h5 class="card-title" th:text="${corso.titolo}"></h5>
-                    	<p class="card-text">Categoria: <span th:text="${corso.categorie.nome}"></span></p>
-                        <p class="card-text">Livello di Difficoltà: <span th:text="${corso.livelloDifficolta}"></span></p>
-                        <p class="card-text">Durata: <span th:text="${corso.durata}"></span></p>
-                        <ul style="list-style: none; padding-left: 0">
-                        	<li th:each="t : ${corso.tags}" th:text="${t.nome}" style="display: inline">
-                            </li>
-                        </ul>
-                </div>
-           </div>
-    	</a>
+    	<th:block th:insert="fragments :: cardB(${corso.id},
+                        ${corso.capitoli[0].url},
+                        ${corso.titolo}, ${corso.categorie.nome},
+                        ${corso.livelloDifficolta},${corso.durata},
+                        ${corso.tags})">
+                        </th:block>
+       </div>
+    </div>
+    <hr>
+	</div>
+	
+	<div class="container mt-3 mb-3">
+	<h2 >Corsi in sconto:</h2>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+    	<div class="col" th:each="corso : ${tag}">
+    	<th:block th:insert="fragments :: cardB(${corso.id},
+                        ${corso.capitoli[0].url},
+                        ${corso.titolo}, ${corso.categorie.nome},
+                        ${corso.livelloDifficolta},${corso.durata},
+                        ${corso.tags})">
+                        </th:block>
        </div>
     </div>
 	</div>
+
 		
 	</main>
-	
+
+	<footer th:replace = "fragments :: footer"></footer>
+
+
 	<script src="./Headers · Bootstrap v5.2_files/bootstrap.bundle.min.js.download" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 	
 </body>
+
 </html>

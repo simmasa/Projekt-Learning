@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments :: metatags(name='Ricerca Corsi')">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<main>
+  <div class="container my-3 prova">
+    <div>
+    <h2 class="text-center">Ricerca corsi</h2>
+
+    </div>
+    <div class="">
+      <h4 class="mb-3">Ricerca avanzata</h4>
+        <form class="form-control border-0" th:action="@{/corsi/search}">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="titolo" class="form-label">Titolo</label>
+              <input type="text" class="form-control" id="titolo" placeholder="Java" th:name="title" th:value="${param.title}">
+            </div>
+
+            <div class="col-sm-6">
+              <label for="doc" class="form-label">Insegnante</label>
+              <input type="text" class="form-control" id="doc" placeholder="Giancarlo Lauretti" th:name="doc" th:value="${param.doc}">
+            </div>
+
+            <div class="col-6">
+              <label for="LD" class="form-label">Livello di difficoltà</label>
+                <input type="text" class="form-control" id="LD" placeholder="1-5" th:name="LD" th:value="${param.LD}">
+            </div>
+
+            <div class="col-6">
+              <label for="cat" class="form-label">Categoria</label>
+              <input type="text" class="form-control" id="cat" placeholder="Informatica,Cucina...." th:name="Cat" th:value="${param.Cat}">
+            </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Cerca</button>
+          </div>
+        </form>
+      </div>
+    </form>
+
+    <div class="search" th:if="${!list.empty and list!=null}">
+      <div class="section-title my-3">
+        <h3>I risultati della tua ricerca</h3>
+      </div>
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          <div class="col" th:each="corso : ${list}">
+            <th:block th:insert="fragments :: cardB(${corso.id},
+                            ${corso.capitoli[0].url},
+                            ${corso.titolo}, ${corso.categorie.nome},
+                            ${corso.livelloDifficolta},${corso.durata},
+                            ${corso.tags})">
+            </th:block>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:unless="${!list.empty}">
+      <div class="text-center my-2">
+        <h3>Non abbiamo trovato risultati per la tua ricerca (o non hai ancora cercato nulla!)</h3>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace = "fragments :: footer"></footer>
+</body>
+</html>

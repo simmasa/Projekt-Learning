@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:replace="fragments :: metatags(name='Capitoli')"></th:block>
+</head>
+<body>
+
+<th:block th:replace="fragments :: header"></th:block>
+
+<form
+        id="form-insegnanti"
+        th:object="${AddCapitolo}"
+        th:action="@{/admin/saveCap}"
+        method="POST"
+>
+    <input type="hidden" name="corsi" th:value="${corso.id}">
+    <div class="container w-25 mt-5" >
+        <div class="form-group">
+
+            <label for="nome">Nome Capitolo</label>
+            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Nome Capitolo" th:field="*{titolo}" th:errorClass="is-invalid">
+            <div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+                <div th:each="err : ${#fields.errors('titolo')}" th:text="${err}"></div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="cognome">Descrizione</label>
+            <textarea type="text" class="form-control" id="cognome" aria-describedby="emailHelp" placeholder="Scrivi una breve descrizione..." th:field="*{descrizione}" th:errorClass="is-invalid"></textarea>
+            <div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+
+                <div th:each="err : ${#fields.errors('descrizione')}" th:text="${err}"></div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label for="link">URL Capitolo</label>
+            <input type="text" class="form-control" id="link" minlength="11" maxlength="15" aria-describedby="emailHelp" placeholder="Inserisci URL" th:field="*{url}" th:errorClass="is-invalid">
+            <div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
+                <div th:each="err : ${#fields.errors('url')}" th:text="${err}"></div>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-dark mt-2"> Salva </button>
+    </div>
+</form>
+<!-- footer th:replace = "fragments :: footer"></footer -->
+</body>
+</html>

@@ -3,7 +3,9 @@ package com.example.projekt.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "insegnanti")
@@ -21,16 +23,22 @@ public class Insegnante {
     @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Lob
-    @Column(name = "foto")
-    private String foto;
-
-
     @OneToMany(mappedBy = "insegnanti", orphanRemoval = true)
     private List<Prenotazione> prenotazioni = new ArrayList<>();
 
     @ManyToMany(mappedBy = "insegnantis")
     private List<Corso> corsi = new ArrayList<>();
+
+    @OneToMany(mappedBy = "insegnante", orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     public List<Corso> getCorsi() {
         return corsi;
@@ -47,15 +55,6 @@ public class Insegnante {
 
     public void setPrenotazioni(List<Prenotazione> prenotazioni) {
         this.prenotazioni = prenotazioni;
-    }
-
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public String getCognome() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <th:block th:fragment="metatags">
         <meta charset="UTF-8">
@@ -12,6 +12,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Tomorrow&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/likeBtn.js"></script>
         <style>
       .bi {
         vertical-align: -.125em;
@@ -43,6 +45,19 @@
       .card {
       min-height: 100%;
       }
+      footer {
+         	text-align: center;
+         	margin-top: 30px;
+            margin-bottom: 0px;
+            width: 100%;
+       }
+       .prova {
+            min-height: 70vh;
+            min-height: -webkit-calc(100vh - 186px);
+            min-height: -moz-calc(100vh - 186px);
+            min-height: calc(100vh - 186px);
+       }
+       
     </style>
     </th:block>
 </head>
@@ -53,8 +68,8 @@
 <main>
 
     <header th:fragment="header">
-        <div class="px-3 py-2 text-bg-dark">
-            <div class="container mx-auto">
+        <div class="px-3 py-2 bg-dark">
+            <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a th:href="@{/}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 
@@ -71,40 +86,48 @@
                                 Home
                             </a>
                         </li>
-                        <li>
+                        <li >
                             <a th:href="@{/corsi}" class="nav-link text-white">
                                 <div class="text-center p-0"><i class="bi bi-book" style="font-size: 1.5rem; color: currentColor"></i></div>
                                 Corsi
                             </a>
                         </li>
-                        <li>
+                        <li >
+                            <a th:href="@{/corsi/search}" class="nav-link text-white">
+                                <div class="text-center p-0"><i class="bi bi-search" style="font-size: 1.5rem; color: currentColor"></i></div>
+                                Cerca
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAuthority('USER')">
                             <a th:href="@{/insegnanti}" class="nav-link text-white">
                                 <div class="text-center p-0"><i class="bi bi-mortarboard" style="font-size: 1.5rem; color: currentColor"></i></div>
                                 Insegnanti
                             </a>
                         </li>
-                        <li>
-                            <a th:href="@{/admin}" class="nav-link text-white">
+                        <li sec:authorize="hasAuthority('ADMIN')">
+                            <a th:href="@{/admin}" class="nav-link text-white" >
                                 <div class="text-center p-0"><i class="bi bi-menu-button" style="font-size: 1.5rem; color: currentColor"></i></div>
                                 Admin
                             </a>
+                        </li>
+                        <li>
+                            <div sec:authorize="isAnonymous()">
+                                <a href="/login" class="nav-link text-white">
+                                <div class="text-center p-0"><i class="bi bi-box-arrow-in-right" style="font-size: 1.5rem; color: currentColor"></i></div>
+                                Login
+                                </a>
+                            </div>
+                            <div sec:authorize="isAuthenticated()">
+                                <a href="/logout" class="nav-link text-white">
+                                    <div class="text-center p-0"><i class="bi bi-box-arrow-right" style="font-size: 1.5rem; color: currentColor"></i></div>
+                                    Logout
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <!-- div class="px-3 py-2 border-bottom mb-3">
-          <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-              <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-            </form>
-
-            <div class="text-end">
-              <button type="button" class="btn btn-light text-dark me-2">Login</button>
-              <button type="button" class="btn btn-primary">Sign-up</button>
-            </div>
-          </div>
-        </div -->
     </header>
 
     <div class="b-example-divider"></div>
@@ -112,27 +135,59 @@
     
 
     <th:block th:fragment="cardB (corsoId,corsoURL,corsoT,corsoN,corsoLD,corsoD,corsoTa)">
-        <a th:href="@{|/corsi/${corsoId}|}" class="linkN">
-            <div class="card shadow-sm">
-                <img th:src="@{'https://img.youtube.com/vi/'+ ${corsoURL} +'/0.jpg'}" alt="thumbnail Youtube">
+        <div class="card shadow position-relative">
+            <div sec:authorize="isAuthenticated()" th:id="'card-'+${corsoId}" th:attr="data-corsoId=${corsoId}"
+                 class="position-absolute top-0 end-0 p-2 bg-dark text-white-50 bg-opacity-50 rounded-start likebtn"
+            style="cursor:pointer">
+                <i class="bi bi-heart-fill"></i>
+            </div>
+            <a th:href="@{|/corsi/${corsoId}|}" class="linkN">
+
+                <img class="w-100" th:src="@{'https://img.youtube.com/vi/'+ ${corsoURL} +'/0.jpg'}" alt="thumbnail Youtube">
                 <div class="card-body">
                     <div class="tiolo border-bottom">
                         <h5 class="card-title" th:text="${corsoT}"></h5>
                     </div>
                     <p class="card-text">Categoria: <span th:text="${corsoN}"></span></p>
                     <p class="card-text">Livello di Difficoltà: <span th:text="${corsoLD}"></span></p>
-                    <p class="card-text">Durata: <span th:text="${corsoD}"></span></p>
+                    <p class="card-text">Durata: <span th:text="${corsoD} + ' ore'"></span></p>
                     <ul style="list-style: none; padding-left: 0">
-                        <li th:each="t : ${corsoTa}" th:text="${t.nome}" style="display: inline">
+                        <li th:each="t : ${corsoTa}" th:text="${t.nome}" class="badge rounded-pill text-bg-primary lh-lg"
+                            style="display: inline">
 
                         </li>
                     </ul>
                 </div>
-            </div>
-        </a>
+
+            </a>
+        </div>
     </th:block>
 
 </main>
+
+
+        <footer th:fragment="footer" class="d-flex bg-dark flex-wrap justify-content-between align-items-center  border-top py-2 pe-2">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="ms-4 mb-3 mb-md-0 text-muted">© 2022 Team 3; Jana60</span>
+            </div>
+            <div class="text-muted d-flex py-1">
+                <div class="mx-2">
+                    <div>Simone Masala</div>
+                    <div>Matteo Covetti</div>
+                </div>
+                <div class="mx-2">
+                    <div>RubenJoshua Fiore</div>
+                    <div>Emanuele Esposito</div>
+                </div>
+
+
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-3">
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitter"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook"></i></a></li>
+            </ul>
+        </footer>
 
 
 

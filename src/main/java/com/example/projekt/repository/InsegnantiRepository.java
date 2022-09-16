@@ -9,4 +9,6 @@ import java.util.List;
 public interface InsegnantiRepository extends CrudRepository<Insegnante, Integer> {
 
     List<Insegnante> findAllByOrderByNome();
+
+
 }

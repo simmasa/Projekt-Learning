@@ -16,6 +16,7 @@
 <body>
 
 <th:block th:replace="fragments :: header"></th:block>
+
 <div class="container bg-secondary bg-opacity-50 mb-2 pb-1 rounded-bottom">
     <div class="container-fluid d-flex justify-content-around ">
         <div class="text-center bg-white rounded m-1 col-5">
@@ -35,6 +36,7 @@
                 </tbody>
             </table>
         </div>
+
         <div class="text-center bg-white rounded m-1 col-5">
             <h3>Ultimi Corsi Aggiunti</h3>
             <table class="table bg-white">
@@ -61,7 +63,7 @@
                     <option selected value="">Seleziona un professore</option>
                     <option th:each="i : ${insegnanti}" th:text="${i.nome}+' '+${i.cognome}" th:value="${i.id}"></option>
                 </select>
-                <button class="btn btn-outline-secondary" type="submit">Button</button>
+                <button class="btn btn-outline-secondary" type="submit">Cerca</button>
             </div>
         </form>
         <table class="table table-hover">
@@ -142,6 +144,7 @@
                 <td class="ms-5 text-center">
                     <a class="btn btn-dark"  title="Edit" th:href="@{|/admin/editCorsi/${corsi.getId}|}"><i class="bi bi-pen text-white"></i></a>
                     <a class="btn btn-dark" title="Delete" th:href="@{|/admin/delCorsi/${corsi.getId}|}" onclick="return confirm('Sei sicuro ?')"><i class="bi bi-trash text-white"></i></a>
+                    <a class="btn btn-dark" title="Aggiungi Capitolo" th:href="@{|/admin/capitoli/${corsi.id}|}"><i class="bi bi-book text-white"></i></a>
                 </td>
             </tr>
             </tbody>
@@ -149,6 +152,7 @@
     </div>
 </div>
 
+<footer th:replace = "fragments :: footer"></footer>
 
 <script src="./Headers · Bootstrap v5.2_files/bootstrap.bundle.min.js.download" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

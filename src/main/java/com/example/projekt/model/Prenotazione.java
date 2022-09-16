@@ -10,38 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "prenotazioni")
-
+@Table(name = "prenotazioni", uniqueConstraints = { @UniqueConstraint(name = "uc_prenotazione", columnNames = {
+		"data_prenotazione", "slot_orari", "insegnanti_id" }) })
 public class Prenotazione {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-
+	@NotEmpty(message = "Devi inserire un email")
 	@Column(name = "email_prenonato", nullable = false)
 	private String emailPrenonato;
 
 	@Column(name = "data_prenotazione", nullable = false)
 	private Date dataPrenotazione;
 
+	@NotEmpty(message = "Devi inserire un orario")
 	@Column(name = "slot_orari", nullable = false, length = 5)
 	private String slotOrari;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "insegnanti_id", nullable = false)
+	private Insegnante insegnanti;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "insegnanti_id", nullable = false)
-    private Insegnante insegnanti;
+	public Insegnante getInsegnanti() {
+		return insegnanti;
+	}
 
-    public Insegnante getInsegnanti() {
-        return insegnanti;
-    }
-
-    public void setInsegnanti(Insegnante insegnanti) {
-        this.insegnanti = insegnanti;
-    }
+	public void setInsegnanti(Insegnante insegnanti) {
+		this.insegnanti = insegnanti;
+	}
 
 	public String getSlotOrari() {
 		return slotOrari;
