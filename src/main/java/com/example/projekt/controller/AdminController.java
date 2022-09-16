@@ -40,6 +40,9 @@ public class AdminController {
  @Autowired
  private CapitoloRepository cap;
 
+ @Autowired
+ private TagRepository tags;
+
 
  @GetMapping
     public String List(@RequestParam(value = "iId", required = false) Integer iId,Model model){
@@ -105,6 +108,7 @@ public class AdminController {
         model.addAttribute("Categorie", cat.findAll());
         model.addAttribute("AddInsegnanti", ins.findAllByOrderByNome());
         model.addAttribute("AddCorsi", new Corso());
+        model.addAttribute("tags", tags.findAll());
         return "formCorsi";
     }
 
@@ -119,6 +123,7 @@ public class AdminController {
         model.addAttribute("Categorie", cat.findAll());
         model.addAttribute("AddInsegnanti", ins.findAllByOrderByNome());
         model.addAttribute("AddCorsi", corsi.findById(idCorsi));
+        model.addAttribute("tags", tags.findAll());
         return "formCorsi";
     }
 
@@ -126,6 +131,7 @@ public class AdminController {
     public String saveCorsi(@ModelAttribute("AddCorsi") Corso formCorsi, Model model) {
         formCorsi.setDataCreazione(Date.valueOf(LocalDate.now()));
         formCorsi.setNumVisual(0L);
+        formCorsi.setLikes(0L);
         corsi.save(formCorsi);
         return "redirect:/admin";
 

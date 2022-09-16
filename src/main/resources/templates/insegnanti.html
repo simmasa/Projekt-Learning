@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-	<th:block th:replace="fragments::metatags(name='Lista Insegnanti')"></th:block>
+	<th:block th:replace="fragments::metatags(name='Edit insegnante')"></th:block>
 </head>
 
 <body>
@@ -10,7 +10,7 @@
 		<th:block th:replace="fragments::header">
 		</th:block>
 	</header>
-	<h1 class="text-center">Insegnanti</h1>
+	<h1 class="text-center mt-3 mb-4">Insegnanti</h1>
 
 	<div class="all prova">
 		<div class="container-flex">
@@ -21,10 +21,10 @@
 
 					<a th:href="@{|insegnanti/detail/${i.id}|}" class="link-dark" style="text-decoration: none">
 
-						<div class="card shadow-sm">
-							<img th:src="@{|/image/${i.images[i.images.size()-1].id}/content|}"style="height: 250px" class="responsive"
+						<div class="card shadow rounded-3">
+							<img th:src="@{|/image/${i.images[i.images.size()-1].id}/content|}"style="height: 250px" class="rounded-circle responsive border border-black shadow"
 								alt="pro pic insegnante">
-
+							<hr>
 							<div class="card-body">
 								<p class="card-text">Nome: <span th:text="${i.nome}"></span></p>
 								<p class="card-text">Cognome: <span th:text="${i.cognome}"></span></p>

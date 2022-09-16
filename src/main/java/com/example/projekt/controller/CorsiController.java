@@ -38,7 +38,7 @@ public class CorsiController {
             m.addAttribute("corsi", corsiRepo.findAll());
         }
         m.addAttribute("categorie",catRepo.findAll());
-        m.addAttribute("corsiTop",topCorsi(3));
+        m.addAttribute("corsiTop",topCorsi(5));
         return "Corsi";
     }
 

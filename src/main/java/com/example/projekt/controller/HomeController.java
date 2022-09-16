@@ -26,7 +26,7 @@ public class HomeController {
 	@GetMapping
 	public String corsiList(Model model) {
 		model.addAttribute("corsi", corsiRepo.findAll());
-		model.addAttribute("corsiTop", corsiRepo.findByOrderByNumVisualDesc());
+		model.addAttribute("corsiTop", topCorsi());
 		model.addAttribute("capitolo", capitoloRepo.findAll());
 		model.addAttribute("tag", corsiRepo.findByTags_IdLike(6));
 		return "home";
@@ -35,7 +35,7 @@ public class HomeController {
 	public List<Corso> topCorsi() {
 		List<Corso> completa = corsiRepo.findByOrderByNumVisualDesc();
 		List<Corso> top = new ArrayList<Corso>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			top.add(completa.get(i));
 		}
 		return top;
