@@ -133,7 +133,7 @@ public class AdminController {
         formCorsi.setNumVisual(0L);
         formCorsi.setLikes(0L);
         corsi.save(formCorsi);
-        return "redirect:/admin";
+        return "redirect:/admin/capitoli/"+formCorsi.getId();
 
     }
 
